@@ -1,171 +1,179 @@
-foods = {
-    'pancit canton': [
-        {
-            'flavor': 'classic',
-            'url':'',
-            'amnt':'',
-        },
-        {
-            'flavor': 'calamansi',
-            'url': '',
-            'amnt':'',
 
-        },
-        {
-            'flavor': 'chili-mansi',
-            'url': '',
-            'amnt':'',
+combomeals = {}
+alacarte = {
+    'pancit canton' : [
+                                        {
+                                        'flavor': 'classic',
+                                        'url':'',
+                                        'amnt':'',
+                                        },
+                                        {
+                                            'flavor': 'calamansi',
+                                            'url': '',
+                                            'amnt':'',
 
-        },
-        {
-            'flavor': 'sweetspicy',
-            'url': '',
-            'amnt':'',
-
-        },
-        {
-            'flavor': 'hotchili',
-            'url': '',
-            'amnt':'',
-        }
-
-    ],
-    'kwek-kwek': [
-        {
-            'sauce': 'plain',
-            'url': '',
-            'amnt':'',
-        },
-        {
-            'sauce': 'sweet',
-            'url': '',
-            'amnt':'',
-        },
-        {
-            'sauce': 'sweetspicy',
-            'url': '',
-            'amnt':'',
-        },
-        {
-            'sauce': 'vinegarsauce',
-            'url': '',
-            'amnt':'',
-        },
-        {
-            'sauce': 'sweetvinegarsauce',
-            'url': '',
-            'amnt':'',
-        }
-    ],
-    'kikiam': [
-        {
-            'sauce': 'plain',
-            'url': '',
-            'amnt':'',
-        },
-        {
-            'sauce': 'sweet',
-            'url': '',
-            'amnt':'',
-        },
-        {
-            'sauce': 'sweetspicy',
-            'url': '',
-            'amnt':'',
-        },
-        {
-            'sauce': 'vinegarsauce',
-            'url': '',
-            'amnt':'',
-        },
-        {
-            'sauce': 'sweetvinegarsauce',
-            'url': '',
-            'amnt':'',
-        }
-    ],
-    'fishball': [
-        {
-            'sauce': 'plain',
-            'url': '',
-            'amnt': '',
-        },
-        {
-        'sauce': 'sweet',
-        'url': '',
-        'amnt':'',
-        },
-        {
-        'sauce': 'sweetspicy',
-        'url': '',
-        'amnt':'',
-        },
-        {
-        'sauce': 'vinegarsauce',
-        'url': '',
-        'amnt':'',
-        },
-        {
-        'sauce': 'sweetvinegarsauce',
-        'url': '',
-        'amnt':'',
-        }
-    ],
-    'squidball': [
-        {
-        'sauce': 'plain',
-        'url': '',
-        'amnt':'',
-        },
-        {
-        'sauce': 'sweet',
-        'url': '',
-        'amnt':'',
-        },
-        {
-        'sauce': 'sweetspicy',
-        'url': '',
-        'amnt':'',
-        },
-        {
-        'sauce': 'vinegarsauce',
-        'url': '',
-        'amnt':'',
-        },
-        {
-        'sauce': 'sweetvinegarsauce',
-        'url': '',
-        'amnt':'',
-        }
-    ],
-    'chickenball': [
-            {
-            'sauce': 'plain',
-            'url': '',
-            'amnt':'',
-            },
-            {
-            'sauce': 'sweet',
-            'url': '',
-            'amnt':'',
-            },
-            {
-            'sauce': 'sweetspicy',
-            'url': '',
-            'amnt':'',
-            },
-            {
-            'sauce': 'vinegarsauce',
-            'url': '',
-            'amnt':'',
-            },
-            {
-            'sauce': 'sweetvinegarsauce',
-            'url': '',
-            'amnt':'',
-            }
-    ],
+                                        },
+                                        {
+                                        'flavor': 'chili-mansi',
+                                        'url': '',
+                                        'amnt':'',
+                                        },
+                                        {
+                                            'flavor': 'sweetspicy',
+                                            'url': '',
+                                            'amnt':'',
+                                        },
+                                        {
+                                            'flavor': 'hotchili',
+                                            'url': '',
+                                            'amnt':'',
+                                        },
+                    ],
+    'kwek-kwek' : [
+                                {
+                                    'sauce': 'plain',
+                                    'url': '',
+                                    'amnt':'',
+                                },
+                                {
+                                    'sauce': 'sweet',
+                                    'url': '',
+                                    'amnt':'',
+                                },
+                                {
+                                    'sauce': 'sweetspicy',
+                                    'url': '',
+                                    'amnt':'',
+                                },
+                                {
+                                    'sauce': 'vinegarsauce',
+                                    'url': '',
+                                    'amnt':'',
+                                },
+                                {
+                                    'sauce': 'sweetvinegarsauce',
+                                    'url': '',
+                                    'amnt':'',
+                                }
+                    ],
+    'kikiam' : [
+                                {
+                                    'sauce': 'plain',
+                                    'url': '',
+                                    'amnt':'',
+                                },
+                                {
+                                    'sauce': 'sweet',
+                                    'url': '',
+                                    'amnt':'',
+                                },
+                                {
+                                    'sauce': 'sweetspicy',
+                                    'url': '',
+                                    'amnt':'',
+                                },
+                                {
+                                    'sauce': 'vinegarsauce',
+                                    'url': '',
+                                    'amnt':'',
+                                },
+                                {
+                                    'sauce': 'sweetvinegarsauce',
+                                    'url': '',
+                                    'amnt':'',
+                                }
+                                                                         ],
+    'fishball' : [
+                                {
+                                    'sauce': 'plain',
+                                    'url': '',
+                                    'amnt': '',
+                                },
+                                {
+                                'sauce': 'sweet',
+                                'url': '',
+                                'amnt':'',
+                                },
+                                {
+                                'sauce': 'sweetspicy',
+                                'url': '',
+                                'amnt':'',
+                                },
+                                {
+                                'sauce': 'vinegarsauce',
+                                'url': '',
+                                'amnt':'',
+                                },
+                                {
+                                'sauce': 'sweetvinegarsauce',
+                                'url': '',
+                                'amnt':'',
+                                }
+],
+    'squidball' :  [
+                                {
+                                'sauce': 'plain',
+                                'url': '',
+                                'amnt':'',
+                                },
+                                {
+                                'sauce': 'sweet',
+                                'url': '',
+                                'amnt':'',
+                                },
+                                {
+                                'sauce': 'sweetspicy',
+                                'url': '',
+                                'amnt':'',
+                                },
+                                {
+                                'sauce': 'vinegarsauce',
+                                'url': '',
+                                'amnt':'',
+                                },
+                                {
+                                'sauce': 'sweetvinegarsauce',
+                                'url': '',
+                                'amnt':'',
+                                }
+                    ],
+    'chickenball' : [
+                                    {
+                                    'sauce': 'plain',
+                                    'url': '',
+                                    'amnt':'',
+                                    },
+                                    {
+                                    'sauce': 'sweet',
+                                    'url': '',
+                                    'amnt':'',
+                                    },
+                                    {
+                                    'sauce': 'sweetspicy',
+                                    'url': '',
+                                    'amnt':'',
+                                    },
+                                    {
+                                    'sauce': 'vinegarsauce',
+                                    'url': '',
+                                    'amnt':'',
+                                    },
+                                    {
+                                    'sauce': 'sweetvinegarsauce',
+                                    'url': '',
+                                    'amnt':'',
+                                    }
+                                    ],
+         }
+drinks = {}
+meals = {
+    'combomeals' : combomeals,
+    'alacarte' : alacarte,
+    'drinks' : drinks
 }
+
+for meal in alacarte:
+    print(alacarte)
 
 
 pets = {
@@ -204,6 +212,7 @@ pets = {
         }
     ]
 }
+
 
 import sqlite3
 
