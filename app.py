@@ -8,8 +8,11 @@ def index():
     return render_template('index.html')
 
 @app.route('/menu')
-def menu():
-    return render_template('menu.html')
+def basemenu():
+    return render_template('basemenu.html')
+@app.route('/menu/<meals_type>')
+def menu(meals_type):
+    return render_template('menu.html',meals_type=meals_type,)
 
 @app.route('/animals/<pet_type>')
 def animals(pet_type):

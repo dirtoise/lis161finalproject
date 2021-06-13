@@ -172,9 +172,6 @@ meals = {
     'drinks' : drinks
 }
 
-for meal in alacarte:
-    print(alacarte)
-
 
 pets = {
     'dogs': [
