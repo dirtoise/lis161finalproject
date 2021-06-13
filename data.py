@@ -172,6 +172,17 @@ meals = {
     'drinks' : drinks
 }
 
+for i in meals:
+   if i == 'alacarte':
+        for x in alacarte:
+            print(x)
+   elif i == 'combomeals':
+        for x in combomeals:
+            print(x)
+   else:
+        for x in drinks:
+            print(x)
+
 
 pets = {
     'dogs': [
