@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+.btn-3 {
+  line-height: ;
+  padding: 20px 125px;
+}
+.btn-3:hover{
+  background: transparent;
+  color: #000;
+}
+.btn-3 span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.btn-3:before,
+.btn-3:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  background: #000;
+  transition: all 0.3s ease;
+}
+.btn-3:before {
+  height: 0%;
+  width: 2px;
+}
+.btn-3:after {
+  width: 0%;
+  height: 2px;
+}
+.btn-3:hover:before {
+  height: 100%;
+}
+.btn-3:hover:after {
+  width: 100%;
+}
+.btn-3 span:before,
+.btn-3 span:after {
+  position: absolute;
+  content: "";
+  right: 0;
+  bottom: 0;
+  background: #000;
+  transition: all 0.3s ease;
+}
+.btn-3 span:before {
+  width: 2px;
+  height: 0%;
+}
+.btn-3 span:after {
+  width: 0%;
+  height: 2px;
+}
+.btn-3 span:hover:before {
+  height: 100%;
+}
+.btn-3 span:hover:after {
+  width: 100%;
+}
+
+</style>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav hidden-xs">
+      <h2>THE UP E-KIOSK MENU</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li class=""><a href="#section1">Combo Meals</a></li>
+        <li><a href="#section2">À La Carte</a></li>
+        <li><a href="#section3">Drinks</a></li>
+
+      </ul><br>
+    </div>
+    <br>
+
+    <div class="col-sm-9">
+      <div class="well">
+        <h4>Dashboard</h4>
+        <p>Some text..</p>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <h4><button class="custom-btn btn-3" type="submit" value="Pancit Canton" name="action">Pancit Canton</h4>
+          </div>
+        </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <h4><button class="custom-btn btn-3" type="submit" value="Fish Ball" name="action">Fish Ball</h4>
+        </div>
+      </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <h4>Sessions</h4>
+            <p><button>10 Million</button></p>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <h4>Bounce</h4>
+            <p>30%</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Text</p>
+            <p>Text</p>
+            <p>Text</p>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Text</p>
+            <p>Text</p>
+            <p>Text</p>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Text</p>
+            <p>Text</p>
+            <p>Text</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="well">
+            <p>Text</p>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Text</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
