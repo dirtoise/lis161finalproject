@@ -65,14 +65,9 @@
 
 </style>
 {% include 'menusidebar.html' %}
-  <h1>{{ meals_type.upper() }}</h1>
-  <ul>
+  <h1>Order a meal.</h1>
 
-    {% for meal in meals %}
-    <li><a href="/menu/{{ meals_type }}/ ">{{ meals['name'] }}</a></li>
-    {% endfor %}
-  </ul>
-  </div>
+
   <div class="col-sm-9">
     <div class="well">
       <h4>Dashboard</h4>
