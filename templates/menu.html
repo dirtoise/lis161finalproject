@@ -65,59 +65,34 @@
 
 </style>
 {% include 'menusidebar.html' %}
+<div>
   <h1>{{ meals_type.upper() }}</h1>
-  <ul>
 
+  <p><li> help </li> </p>
+
+  <div class="row">
     {% for meal in meals %}
-    <li><a href="/menu/{{ meals_type }}/ ">{{ meals['name'] }}</a></li>
+      {% if meal == 'combomeals' %}
+        {% for fdtype in combomeals %}
+          <li><a href="/menu/{{ meals_type }}/ ">{{ fdtype }}</a></li>
+        {% endfor %}
+      {% elif meal == 'alacarte' %}
+        {% for fdtype in alacarte %}
+          <a href="/menu/{{ meals_type }}/"></a>
+            <div class="col-sm-4">
+              <div class="well">
+              <h4>{{ fdtype }}</h4>
+              <p><button class="" type="submit" value="{{ fdtype }}" name="action">Order</button></p>
+              </div>
+            </div>
+        {% endfor %}
+      {% else %}
+        {% for fdtype in drnks %}
+          <li><a href="/menu/{{ meals_type }}/">{{ fdtype }}</a></li>
+        {% endfor %}
+      {% endif %}
     {% endfor %}
-  </ul>
   </div>
-  <div class="col-sm-9">
-    <div class="well">
-      <h4>Dashboard</h4>
-      <p>Some text..</p>
-    </div>
-    <div class="row">
-      <div class="col-sm-4">
-        <div class="well">
-        <h4>Pancit Canton</h4>
-        <p><button class="" type="submit" value="Pancit Canton" name="action">Order</button></p>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="well">
-        <h4>Kwek-kwek</h4>
-        <p><button class="" type="submit" value="Kwek-kwek" name="action">Order</button></p>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="well">
-          <h4>Kikiam</h4>
-        <p><button class="" type="submit" value="Kikiam" name="action">Order</button></p>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-4">
-        <div class="well">
-        <h4>Fish Ball</h4>
-        <p><button class="" type="submit" value="Fish Ball" name="action">Order</button></p>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="well">
-        <h4>Squid Ball</h4>
-        <p><button class="" type="submit" value="Squid Ball" name="action">Order</button></p>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="well">
-          <h4>Chicken Ball</h4>
-        <p><button class="" type="submit" value="Chicken Ball" name="action">Order</button></p>
-        </div>
-      </div>
-    </div>
+  </p>
 
 {% endblock %}
