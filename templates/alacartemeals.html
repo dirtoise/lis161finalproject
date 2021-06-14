@@ -2,6 +2,7 @@
 
 {% block content %}
 <style>
+
 .btn-3 {
   line-height: ;
   padding: 20px 125px;
@@ -63,19 +64,30 @@
   width: 100%;
 }
 
+.row_list li{
+display: inline;
+}
 </style>
 {% include 'menusidebar.html' %}
-
-{% for alacartemeals, val in alacarte.items() %}
-       {% if 
-        <h1>{{ alacartemeals }}</h1>
-        <li>{{ alacartemeals.url }}</li>
-        <li>{{ alacartemeals.flavor }}</li>
-        <li>P:{{ alacartemeals.price }}</li>
-        <li>{{ alacartemeals.amnt }}</li>
-
+<h1>{{ alacarte_type }}</h1>
+<p>
+{% for meals in alacarte %}
+    <img src="{{ meals.url }}"alt="">
+    <input class=""  type="radio" value="{{ meals.flavor }}" name="action">{{ meals.flavor }}
+</p>
 {% endfor %}
-
+<p>
+Order amount:
+<div class="number">
+<span class="minus">-</span>
+<input type="text" value="0">
+<span class="plus">+</span>
+</div>
+</p>
+<p>
+Price:
+</p><p>   <input type="number" value="0">
+</p>
 
 
 {% endblock %}
