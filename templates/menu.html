@@ -68,28 +68,39 @@
 <div>
   <h1>{{ meals_type.upper() }}</h1>
 
-  <p><li> help </li> </p>
-
   <div class="row">
     {% for meal in meals %}
-      {% if meal == 'combomeals' %}
-        {% for fdtype in combomeals %}
-          <li><a href="/menu/{{ meals_type }}/ ">{{ fdtype }}</a></li>
-        {% endfor %}
-      {% elif meal == 'alacarte' %}
-        {% for fdtype in alacarte %}
-          <a href="/menu/{{ meals_type }}/"></a>
-            <div class="col-sm-4">
+      {% if meal == meals_type %}
+        {% if meal == 'combomeals' %}
+          {% for fdtype in combomeals %}
+            <a href="/menu/{{ meals_type }}/"></a>
+              <div class="col-sm-3">
+                <div class="well">
+                <h4>{{ fdtype }}</h4>
+                <p><button class="" type="submit" value="{{ fdtype }}" name="action">Order</button></p>
+                </div>
+              </div>
+          {% endfor %}
+        {% elif meal == 'alacarte' %}
+          {% for fdtype in alacarte %}
+            <div class="col-sm-3">
               <div class="well">
-              <h4>{{ fdtype }}</h4>
+              <h4>{{ fdtype }}{{ fdtype.flavor }}</h4>
               <p><button class="" type="submit" value="{{ fdtype }}" name="action">Order</button></p>
               </div>
             </div>
-        {% endfor %}
-      {% else %}
-        {% for fdtype in drnks %}
-          <li><a href="/menu/{{ meals_type }}/">{{ fdtype }}</a></li>
-        {% endfor %}
+          {% endfor %}
+        {% else %}
+          {% for fdtype in drinks %}
+            <a href="/menu/{{ meals_type }}/"></a>
+              <div class="col-sm-3">
+                <div class="well">
+                <h4>{{ fdtype }}</h4>
+                <p><button class="" type="submit" value="{{ fdtype }}" name="action">Order</button></p>
+                </div>
+              </div>
+          {% endfor %}
+        {% endif %}
       {% endif %}
     {% endfor %}
   </div>

@@ -65,13 +65,17 @@
 
 </style>
 {% include 'menusidebar.html' %}
-  <h1>Order a meal.</h1>
+
+{% for alacartemeals, val in alacarte.items() %}
+       {% if 
+        <h1>{{ alacartemeals }}</h1>
+        <li>{{ alacartemeals.url }}</li>
+        <li>{{ alacartemeals.flavor }}</li>
+        <li>P:{{ alacartemeals.price }}</li>
+        <li>{{ alacartemeals.amnt }}</li>
+
+{% endfor %}
 
 
-  <div class="col-sm-9">
-    <div class="well">
-      <h4>Dashboard</h4>
-      <p>Some text..</p>
-    </div>
 
 {% endblock %}
