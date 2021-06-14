@@ -1,112 +1,332 @@
-
-combomeals = {}
-alacarte = {
-    'pancit canton' : [
+combo1 = {
+    'pancitcanton' : [
                                         {
                                         'flavor': 'classic',
                                         'url':'',
+                                        'price':'',
                                         'amnt':'',
                                         },
                                         {
-                                            'flavor': 'calamansi',
-                                            'url': '',
-                                            'amnt':'',
+                                        'flavor': 'calamansi',
+                                        'url': '',
+                                        'price':'',
+                                        'amnt':'',
 
                                         },
                                         {
                                         'flavor': 'chili-mansi',
                                         'url': '',
+                                        'price':'',
                                         'amnt':'',
                                         },
                                         {
-                                            'flavor': 'sweetspicy',
-                                            'url': '',
-                                            'amnt':'',
+                                        'flavor': 'sweetspicy',
+                                        'url': '',
+                                        'price':'',
+                                        'amnt':'',
                                         },
                                         {
-                                            'flavor': 'hotchili',
-                                            'url': '',
-                                            'amnt':'',
+                                        'flavor': 'hotchili',
+                                        'url': '',
+                                        'price':'',
+                                        'amnt':'',
                                         },
                     ],
     'kwek-kwek' : [
                                 {
-                                    'sauce': 'plain',
-                                    'url': '',
-                                    'amnt':'',
-                                },
-                                {
-                                    'sauce': 'sweet',
-                                    'url': '',
-                                    'amnt':'',
-                                },
-                                {
-                                    'sauce': 'sweetspicy',
-                                    'url': '',
-                                    'amnt':'',
-                                },
-                                {
-                                    'sauce': 'vinegarsauce',
-                                    'url': '',
-                                    'amnt':'',
-                                },
-                                {
-                                    'sauce': 'sweetvinegarsauce',
-                                    'url': '',
-                                    'amnt':'',
-                                }
-                    ],
-    'kikiam' : [
-                                {
-                                    'sauce': 'plain',
-                                    'url': '',
-                                    'amnt':'',
-                                },
-                                {
-                                    'sauce': 'sweet',
-                                    'url': '',
-                                    'amnt':'',
-                                },
-                                {
-                                    'sauce': 'sweetspicy',
-                                    'url': '',
-                                    'amnt':'',
-                                },
-                                {
-                                    'sauce': 'vinegarsauce',
-                                    'url': '',
-                                    'amnt':'',
-                                },
-                                {
-                                    'sauce': 'sweetvinegarsauce',
-                                    'url': '',
-                                    'amnt':'',
-                                }
-                                                                         ],
-    'fishball' : [
-                                {
-                                    'sauce': 'plain',
-                                    'url': '',
-                                    'amnt': '',
+                                'sauce': 'plain',
+                                'url': '',
+                                'price':'',
+                                'amnt':'',
                                 },
                                 {
                                 'sauce': 'sweet',
                                 'url': '',
+                                'price':'',
                                 'amnt':'',
                                 },
                                 {
                                 'sauce': 'sweetspicy',
                                 'url': '',
+                                'price':'',
                                 'amnt':'',
                                 },
                                 {
                                 'sauce': 'vinegarsauce',
                                 'url': '',
+                                'price':'',
                                 'amnt':'',
                                 },
                                 {
                                 'sauce': 'sweetvinegarsauce',
                                 'url': '',
+                                'price':'',
+                                'amnt':'',
+                                }
+                    ],
+}
+combo2 = {
+    'pancitcanton' : [
+                                        {
+                                        'flavor': 'classic',
+                                        'url':'',
+                                        'price':'',
+                                        'amnt':'',
+                                        },
+                                        {
+                                        'flavor': 'calamansi',
+                                        'url': '',
+                                        'price':'',
+                                        'amnt':'',
+
+                                        },
+                                        {
+                                        'flavor': 'chili-mansi',
+                                        'url': '',
+                                        'price':'',
+                                        'amnt':'',
+                                        },
+                                        {
+                                        'flavor': 'sweetspicy',
+                                        'url': '',
+                                        'price':'',
+                                        'amnt':'',
+                                        },
+                                        {
+                                        'flavor': 'hotchili',
+                                        'url': '',
+                                        'price':'',
+                                        'amnt':'',
+                                        },
+                    ],
+    'kikiam': [
+        {
+            'sauce': 'plain',
+            'url': '',
+            'price': '',
+            'amnt': '',
+        },
+        {
+            'sauce': 'sweet',
+            'url': '',
+            'price': '',
+            'amnt': '',
+        },
+        {
+            'sauce': 'sweetspicy',
+            'url': '',
+            'price': '',
+            'amnt': '',
+        },
+        {
+            'sauce': 'vinegarsauce',
+            'url': '',
+            'price': '',
+            'amnt': '',
+        },
+        {
+            'sauce': 'sweetvinegarsauce',
+            'url': '',
+            'price': '',
+            'amnt': '',
+        }
+    ],
+}
+combo3 = {
+    'pancit canton' : [
+                                        {
+                                        'flavor': 'classic',
+                                        'url':'',
+                                        'price':'',
+                                        'amnt':'',
+                                        },
+                                        {
+                                        'flavor': 'calamansi',
+                                        'url': '',
+                                        'price':'',
+                                        'amnt':'',
+
+                                        },
+                                        {
+                                        'flavor': 'chili-mansi',
+                                        'url': '',
+                                        'price':'',
+                                        'amnt':'',
+                                        },
+                                        {
+                                        'flavor': 'sweetspicy',
+                                        'url': '',
+                                        'price':'',
+                                        'amnt':'',
+                                        },
+                                        {
+                                        'flavor': 'hotchili',
+                                        'url': '',
+                                        'price':'',
+                                        'amnt':'',
+                                        },
+                    ],
+    'fishball': [
+        {
+            'sauce': 'plain',
+            'url': '',
+            'price': '',
+            'amnt': '',
+        },
+        {
+            'sauce': 'sweet',
+            'url': '',
+            'price': '',
+            'amnt': '',
+        },
+        {
+            'sauce': 'sweetspicy',
+            'url': '',
+            'price': '',
+            'amnt': '',
+        },
+        {
+            'sauce': 'vinegarsauce',
+            'url': '',
+            'price': '',
+            'amnt': '',
+        },
+        {
+            'sauce': 'sweetvinegarsauce',
+            'url': '',
+            'price': '',
+            'amnt': '',
+        }
+    ],
+}
+
+alacarte = {
+    'pancitcanton' : [
+                                        {
+                                        'flavor': 'classic',
+                                        'url':'',
+                                        'price':'20',
+                                        'amnt':'',
+                                        },
+                                        {
+                                        'flavor': 'calamansi',
+                                        'url': '',
+                                        'price':'',
+                                        'amnt':'',
+
+                                        },
+                                        {
+                                        'flavor': 'chili-mansi',
+                                        'url': '',
+                                        'price':'',
+                                        'amnt':'',
+                                        },
+                                        {
+                                        'flavor': 'sweetspicy',
+                                        'url': '',
+                                        'price':'',
+                                        'amnt':'',
+                                        },
+                                        {
+                                        'flavor': 'hotchili',
+                                        'url': '',
+                                        'price':'',
+                                        'amnt':'',
+                                        },
+                    ],
+    'kwek-kwek' : [
+                                {
+                                'sauce': 'plain',
+                                'url': '',
+                                'price':'',
+                                'amnt':'',
+                                },
+                                {
+                                'sauce': 'sweet',
+                                'url': '',
+                                'price':'',
+                                'amnt':'',
+                                },
+                                {
+                                'sauce': 'sweetspicy',
+                                'url': '',
+                                'price':'',
+                                'amnt':'',
+                                },
+                                {
+                                'sauce': 'vinegarsauce',
+                                'url': '',
+                                'price':'',
+                                'amnt':'',
+                                },
+                                {
+                                'sauce': 'sweetvinegarsauce',
+                                'url': '',
+                                'price':'',
+                                'amnt':'',
+                                }
+                    ],
+    'kikiam' : [
+                                {
+                                'sauce': 'plain',
+                                'url': '',
+                                'price':'',
+                                'amnt':'',
+                                },
+                                {
+                                'sauce': 'sweet',
+                                'url': '',
+                                'price':'',
+                                'amnt':'',
+                                },
+                                {
+                                'sauce': 'sweetspicy',
+                                'url': '',
+                                'price':'',
+                                'amnt':'',
+                                },
+                                {
+                                'sauce': 'vinegarsauce',
+                                'url': '',
+                                'price':'',
+                                'amnt':'',
+                                },
+                                {
+                                'sauce': 'sweetvinegarsauce',
+                                'url': '',
+                                'price':'',
+                                'amnt':'',
+                                }
+],
+    'fishball' : [
+                                {
+                                'sauce': 'plain',
+                                'url': '',
+                                'price':'',
+                                'amnt': '',
+                                },
+                                {
+                                'sauce': 'sweet',
+                                'url': '',
+                                'price':'',
+                                'amnt':'',
+                                },
+                                {
+                                'sauce': 'sweetspicy',
+                                'url': '',
+                                'price':'',
+                                'amnt':'',
+                                },
+                                {
+                                'sauce': 'vinegarsauce',
+                                'url': '',
+                                'price':'',
+                                'amnt':'',
+                                },
+                                {
+                                'sauce': 'sweetvinegarsauce',
+                                'url': '',
+                                'price':'',
                                 'amnt':'',
                                 }
 ],
@@ -114,26 +334,31 @@ alacarte = {
                                 {
                                 'sauce': 'plain',
                                 'url': '',
+                                'price':'',
                                 'amnt':'',
                                 },
                                 {
                                 'sauce': 'sweet',
                                 'url': '',
+                                'price':'',
                                 'amnt':'',
                                 },
                                 {
                                 'sauce': 'sweetspicy',
                                 'url': '',
+                                'price':'',
                                 'amnt':'',
                                 },
                                 {
                                 'sauce': 'vinegarsauce',
                                 'url': '',
+                                'price':'',
                                 'amnt':'',
                                 },
                                 {
                                 'sauce': 'sweetvinegarsauce',
                                 'url': '',
+                                'price':'',
                                 'amnt':'',
                                 }
                     ],
@@ -141,47 +366,78 @@ alacarte = {
                                     {
                                     'sauce': 'plain',
                                     'url': '',
+                                    'price':'',
                                     'amnt':'',
                                     },
                                     {
                                     'sauce': 'sweet',
                                     'url': '',
+                                    'price':'',
                                     'amnt':'',
                                     },
                                     {
                                     'sauce': 'sweetspicy',
                                     'url': '',
+                                    'price':'',
                                     'amnt':'',
                                     },
                                     {
                                     'sauce': 'vinegarsauce',
                                     'url': '',
+                                    'price':'',
                                     'amnt':'',
                                     },
                                     {
                                     'sauce': 'sweetvinegarsauce',
                                     'url': '',
+                                    'price':'',
                                     'amnt':'',
                                     }
                                     ],
-         }
-drinks = {}
+}
+
+
+drinks = {
+    'water': [
+        {
+            'price': '',
+            'url': '',
+            'price':'',
+            'amnt': '',
+        },
+    ],
+    'buko juice': [
+        {
+            'price': '',
+            'url': '',
+            'price':'',
+            'amnt': '',
+        },],
+    'sprite': [
+        {
+            'price': '',
+            'url': '',
+            'price':'',
+            'amnt': '',
+        },
+    ],
+}
+
+combomeals = {
+    'combo1' : combo1,
+    'combo2' : combo2,
+    'combo3' : combo3
+}
 meals = {
     'combomeals' : combomeals,
     'alacarte' : alacarte,
     'drinks' : drinks
 }
 
-for i in meals:
-   if i == 'alacarte':
-        for x in alacarte:
-            print(x)
-   elif i == 'combomeals':
-        for x in combomeals:
-            print(x)
-   else:
-        for x in drinks:
-            print(x)
+#nav sidebar active
+active = 'active'
+
+
 
 
 pets = {

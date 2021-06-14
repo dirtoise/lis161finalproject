@@ -10,9 +10,18 @@ def index():
 @app.route('/menu')
 def basemenu():
     return render_template('basemenu.html')
+
 @app.route('/menu/<meals_type>')
 def menu(meals_type):
     return render_template('menu.html',meals_type=meals_type,meals=meals,alacarte=alacarte,combomeals=combomeals,drinks=drinks)
+
+@app.route('/menu/<meals_type>/<alacarte_type>')
+def alacartemeals(meals_type, alacarte_type):
+    return render_template('alacartemeals.html',alacarte=alacarte,alacartemeals=alacartemeals,)
+
+@app.route('/order')
+def order():
+    return render_template('order.html')
 
 @app.route('/animals/<pet_type>')
 def animals(pet_type):
