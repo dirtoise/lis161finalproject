@@ -17,7 +17,7 @@ def menu(meals_type):
 
 @app.route('/menu/<meals_type>/<alacarte_type>')
 def alacartemeals(meals_type, alacarte_type):
-    return render_template('alacartemeals.html',alacarte=alacarte,alacartemeals=alacartemeals,)
+    return render_template('alacartemeals.html',alacarte=alacarte[alacarte_type], alacarte_type=alacarte_type)
 
 @app.route('/order')
 def order():
