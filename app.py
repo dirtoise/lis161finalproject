@@ -23,6 +23,11 @@ def alacartemeals(meals_type, alacarte_type):
 def order():
     return render_template('order.html')
 
+@app.route('/cart')
+def cart():
+    return render_template('cart.html')
+
+
 @app.route('/animals/<pet_type>')
 def animals(pet_type):
     return render_template('animals.html',pet_type=pet_type, pets=read_pets_by_type(pet_type))
