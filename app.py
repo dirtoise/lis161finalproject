@@ -20,8 +20,15 @@ def alacartemeals(meals_type, alacarte_type):
     return render_template('alacartemeals.html',alacarte=alacarte[alacarte_type], alacarte_type=alacarte_type)
 
 @app.route('/order')
-def order():
+def baseorder():
     return render_template('order.html')
+
+# Kiosk route to work on later
+""" 
+@app.route('order/<kiosk>')
+def order(kiosk):
+    return render_template('kiosk.html')
+"""
 
 @app.route('/cart')
 def cart():
