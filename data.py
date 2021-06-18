@@ -200,200 +200,179 @@ combo3 = {
     ],
 }
 
+price = {
+    'pancitcanton' : [
+        {
+            'price': '20',
+            'amount': '0',
+        },
+                    ],
+    'kwek-kwek' : [
+        {
+            'price': '5',
+            'amount': '0',
+        },
+                    ],
+    'kikiam' : [
+        {
+            'price': '3',
+            'amount': '0',
+        },
+                ],
+    'fishball' : [
+        {
+            'price': '2',
+            'amount': '0',
+        },
+            ],
+    'squidball' :  [
+        {
+            'price': '2',
+            'amount': '0',
+        },
+    ],
+    'chickenball' : [
+        {
+            'price': '2',
+            'amount': '0',
+        },
+    ],
+}
+
 alacarte = {
     'pancitcanton' : [
                                         {
                                         'flavor': 'classic',
-                                        'url':'',
-                                        'price':'20',
-                                        'amnt':'',
+                                        'url':'https://www.adiplomata.com/wp-content/uploads/2020/03/3562.jpg',
                                         },
                                         {
                                         'flavor': 'calamansi',
-                                        'url': '',
-                                        'price':'',
-                                        'amnt':'',
+                                        'url': 'https://cdn.shopify.com/s/files/1/0275/0935/8707/products/533154_2400x1789_780205a9-a113-4682-96da-54bdda755985_1200x895.jpg?v=1598751152',
 
                                         },
                                         {
                                         'flavor': 'chili-mansi',
-                                        'url': '',
-                                        'price':'',
-                                        'amnt':'',
+                                        'url': 'https://cdn.shopify.com/s/files/1/2713/3026/products/lucky-me-pancit-canton-chilli-mansi-instant-noodles-60g-65-p_600x.jpg?v=1545281033',
                                         },
                                         {
                                         'flavor': 'sweetspicy',
-                                        'url': '',
-                                        'price':'',
-                                        'amnt':'',
+                                        'url': 'https://cdn.shopify.com/s/files/1/0275/0935/8707/products/533160_2400x1937_50388313-a7a0-4a2f-9aa7-c39719f620e7_868x700.jpg?v=1598751230',
                                         },
                                         {
                                         'flavor': 'hotchili',
-                                        'url': '',
-                                        'price':'',
-                                        'amnt':'',
+                                        'url': 'https://cdn.shopify.com/s/files/1/2713/3026/products/instant-pancit-canton-hot-chilli-flavor-von-lucky-me-60g_600x.jpg?v=1545281034',
                                         },
                     ],
     'kwek-kwek' : [
                                 {
-                                'sauce': 'plain',
+                                'flavor': 'plain',
                                 'url': '',
-                                'price':'',
-                                'amnt':'',
                                 },
                                 {
-                                'sauce': 'sweet',
+                                'flavor': 'sweet',
                                 'url': '',
-                                'price':'',
-                                'amnt':'',
                                 },
                                 {
-                                'sauce': 'sweetspicy',
+                                'flavor': 'sweetspicy',
                                 'url': '',
-                                'price':'',
-                                'amnt':'',
                                 },
                                 {
-                                'sauce': 'vinegarsauce',
+                                'flavor': 'vinegarsauce',
                                 'url': '',
-                                'price':'',
-                                'amnt':'',
                                 },
                                 {
-                                'sauce': 'sweetvinegarsauce',
+                                'flavor': 'sweetvinegarsauce',
                                 'url': '',
-                                'price':'',
-                                'amnt':'',
                                 }
-                    ],
+],
     'kikiam' : [
                                 {
-                                'sauce': 'plain',
+                                'flavor': 'plain',
                                 'url': '',
-                                'price':'',
-                                'amnt':'',
                                 },
                                 {
-                                'sauce': 'sweet',
+                                'flavor': 'sweet',
                                 'url': '',
-                                'price':'',
-                                'amnt':'',
                                 },
                                 {
-                                'sauce': 'sweetspicy',
+                                'flavor': 'sweetspicy',
                                 'url': '',
-                                'price':'',
-                                'amnt':'',
                                 },
                                 {
-                                'sauce': 'vinegarsauce',
+                                'flavor': 'vinegarsauce',
                                 'url': '',
-                                'price':'',
-                                'amnt':'',
                                 },
                                 {
-                                'sauce': 'sweetvinegarsauce',
+                                'flavor': 'sweetvinegarsauce',
                                 'url': '',
-                                'price':'',
-                                'amnt':'',
                                 }
 ],
     'fishball' : [
                                 {
-                                'sauce': 'plain',
+                                'flavor': 'plain',
                                 'url': '',
-                                'price':'',
-                                'amnt': '',
                                 },
                                 {
-                                'sauce': 'sweet',
+                                'flavor': 'sweet',
                                 'url': '',
-                                'price':'',
-                                'amnt':'',
                                 },
                                 {
-                                'sauce': 'sweetspicy',
+                                'flavor': 'sweetspicy',
                                 'url': '',
-                                'price':'',
-                                'amnt':'',
                                 },
                                 {
-                                'sauce': 'vinegarsauce',
+                                'flavor': 'vinegarsauce',
                                 'url': '',
-                                'price':'',
-                                'amnt':'',
                                 },
                                 {
-                                'sauce': 'sweetvinegarsauce',
+                                'flavor': 'sweetvinegarsauce',
                                 'url': '',
-                                'price':'',
-                                'amnt':'',
                                 }
 ],
     'squidball' :  [
                                 {
-                                'sauce': 'plain',
+                                'flavor': 'plain',
                                 'url': '',
-                                'price':'',
-                                'amnt':'',
                                 },
                                 {
-                                'sauce': 'sweet',
+                                'flavor': 'sweet',
                                 'url': '',
-                                'price':'',
-                                'amnt':'',
                                 },
                                 {
-                                'sauce': 'sweetspicy',
+                                'flavor': 'sweetspicy',
                                 'url': '',
-                                'price':'',
-                                'amnt':'',
                                 },
                                 {
-                                'sauce': 'vinegarsauce',
+                                'flavor': 'vinegarsauce',
                                 'url': '',
-                                'price':'',
-                                'amnt':'',
                                 },
                                 {
-                                'sauce': 'sweetvinegarsauce',
+                                'flavor': 'sweetvinegarsauce',
                                 'url': '',
-                                'price':'',
-                                'amnt':'',
                                 }
-                    ],
+],
     'chickenball' : [
-                                    {
-                                    'sauce': 'plain',
-                                    'url': '',
-                                    'price':'',
-                                    'amnt':'',
-                                    },
-                                    {
-                                    'sauce': 'sweet',
-                                    'url': '',
-                                    'price':'',
-                                    'amnt':'',
-                                    },
-                                    {
-                                    'sauce': 'sweetspicy',
-                                    'url': '',
-                                    'price':'',
-                                    'amnt':'',
-                                    },
-                                    {
-                                    'sauce': 'vinegarsauce',
-                                    'url': '',
-                                    'price':'',
-                                    'amnt':'',
-                                    },
-                                    {
-                                    'sauce': 'sweetvinegarsauce',
-                                    'url': '',
-                                    'price':'',
-                                    'amnt':'',
-                                    }
-                                    ],
+                                {
+                                'flavor': 'plain',
+                                'url': '',
+                                },
+                                {
+                                'flavor': 'sweet',
+                                'url': '',
+                                },
+                                {
+                                'flavor': 'sweetspicy',
+                                'url': '',
+                                },
+                                {
+                                'flavor': 'vinegarsauce',
+                                'url': '',
+                                },
+                                {
+                                'flavor': 'sweetvinegarsauce',
+                                'url': '',
+                                }
+],
 }
 
 
@@ -432,6 +411,27 @@ meals = {
     'combomeals' : combomeals,
     'alacarte' : alacarte,
     'drinks' : drinks
+}
+instance = {
+    'guest' : [{
+            'name':'arl',
+            'cid': 0,
+        },
+            ],
+}
+
+cartdata = { 'guest': [{ 'alacarte_type' : '',
+                         'flavor' : '',
+                         },{
+                         'amount' :'',
+                         'price' : '',
+                        },]
+}
+
+cartprice = { 'guest': [{'amount' : '',
+                         'price' : '',}
+                       ],
+
 }
 
 #nav sidebar active
