@@ -15,13 +15,48 @@ def basemenu():
 def menu(meals_type):
     return render_template('menu.html',meals_type=meals_type,meals=meals,alacarte=alacarte,combomeals=combomeals,drinks=drinks)
 
-@app.route('/menu/<meals_type>/<alacarte_type>')
-def alacartemeals(meals_type, alacarte_type):
-    return render_template('alacartemeals.html',alacarte=alacarte[alacarte_type], alacarte_type=alacarte_type)
+@app.route('/menu/<meals_type>/<alacarte_type>/<int:alacarteid>')
+def alacartemeals(meals_type,alacarte_type,alacarteid):
+    #debatable for deletion---
+    for meal in meals:
+        if meal == 'alacarte':
+            alacarte
+    #------------------------
+    alacarteid = alacarteid
+    for keys, values in alacarte.items():
+        for value in values:
+            value = value
+    return render_template('alacartemeals.html',meals=meals,meals_type=meals_type,alacarte=alacarte,alacarte_type=alacarte_type,price=price)
 
 @app.route('/order')
 def baseorder():
     return render_template('order.html')
+
+@app.route('/instprocessing/', methods=['POST'])
+def instprocessing():
+    finalize = False
+    for cartdatas in cartdata:
+        cartdatas=cartdatas
+
+    cartdata_data = {
+        'alacarte_type' : request.form['alkeys'],
+        'flavor' : request.form['value.flavor'],
+    }
+    cartprice_data = {
+        'price': request.form['value.price'],
+        'amount' : request.form['value.amount'],
+    }
+    if finalize == False:
+        cartdata[cartdatas].append(cartdata_data)
+        cartdata[cartdatas].append(cartprice_data)
+
+    return redirect(url_for('cart'),)
+
+
+@app.route('/cart')
+def cart():
+    return render_template('cart.html', instance=instance, cartdata=cartdata, alacarte=alacarte)
+
 
 # Kiosk route to work on later
 """ 
@@ -29,11 +64,6 @@ def baseorder():
 def order(kiosk):
     return render_template('kiosk.html')
 """
-
-@app.route('/cart')
-def cart():
-    return render_template('cart.html')
-
 
 @app.route('/animals/<pet_type>')
 def animals(pet_type):
