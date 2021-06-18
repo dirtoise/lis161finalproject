@@ -67,7 +67,6 @@
 {% include 'menusidebar.html' %}
 <div>
   <h1>{{ meals_type.title() }}</h1>
-
   <div class="row">
     {% for meal in meals %}
       {% if meal == meals_type %}
@@ -76,19 +75,17 @@
             <a href="/menu/{{ meals_type }}/"></a>
               <div class="col-sm-3">
                 <div class="well">
-                <h4>{{ fdtype | title}}</h4>
-                <p><input class="btn-11" type="submit" value="order" name="action"></input></p>
+                <p><h4><input class="btn-11" type="submit" value="{{ fdtype }}" name="action"></p></h4>
                 </div>
               </div>
           {% endfor %}
         {% elif meal == 'alacarte' %}
-          {% for fdtype in alacarte %}
+          {% for alacarte_type,values in alacarte.items() %}
             <div class="col-sm-3">
               <div class="well">
-              <h4>{{ fdtype | title }}</h4>
               <p>
-                <form action="{{ url_for('alacartemeals',meals_type=meals_type, alacarte_type=fdtype) }}">
-                <input class="btn-11" type="submit" value="Order" name="action"></input></p>
+                <h4>{{ alacarte_type }}<form action="/menu/alacarte/{{ alacarte_type }}/{{ loop.index }}">
+                <input class="btn-11" type="submit" value="Add to cart" name="{{ alacarte_type }}">   </p></h4>
               </form>
               </div>
             </div>
@@ -98,9 +95,8 @@
             <a href="/menu/{{ meals_type }}/"></a>
               <div class="col-sm-3">
                 <div class="well">
-                <h4>{{ fdtype | title }}</h4>
-                <p>
-                  <input class="btn-11" type="submit" value="order" name="action"></input></p>
+                <p><h4>
+                  <input class="btn-11" type="submit" value="{{ fdtype }}" name="action"></input></p></h4>
                 </div>
               </div>
           {% endfor %}
