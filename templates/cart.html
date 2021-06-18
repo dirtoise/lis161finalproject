@@ -2,6 +2,33 @@
 
 {% block content %}
 
-<h1>Cart</h1>
+<h1>Cart:</h1>
+<br>
+<form action="/menu">
+    <input class="custom-btn btn-11" type="submit" value="Add more" name="action"></form>
+
+<form action="">
+    <input class="custom-btn btn-11" type="submit" value="Finalize order" name="action"></form>
+</br>
+<br>
+<select name="order_type" id="o_type">
+    <option selected> ...</option>
+    <option value="delivery">Delivery</option>
+    <option value="pickup">Pickup</option>
+</select>
+<br>
+    <!-- for testing if data was succesfully passed --!>
+     {{ instance }}! This is your order: {{ cartdata }}
+
+
+<p>
+{% for items, values in cartdata.items() %}
+    <br> Hello {{ items|title }} ! This is your order:
+    {% for value in values %}
+       {{ value['alacarte_type'] }} {{ value['flavor'] }} {{ value['amount'] }} {{ value['price'] }}
+    {% endfor %}
+{% endfor %}
+</p>
+<p> Total amount: </p>
 
 {% endblock %}
