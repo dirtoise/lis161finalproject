@@ -69,25 +69,53 @@ display: inline;
 }
 </style>
 {% include 'menusidebar.html' %}
-<h1>{{ alacarte_type }}</h1>
 <p>
-{% for meals in alacarte %}
-    <img src="{{ meals.url }}"alt="">
-    <input class=""  type="radio" value="{{ meals.flavor }}" name="action">{{ meals.flavor }}
+<form action="/menu/alacarte">
+    <input class="custom-btn btn-11" type="submit" value="Go back" name="action"></form>
+
+    <p>
+<form action="{{ url_for('instprocessing') }}" method="post">
+    <input class="custom-btn btn-11" type="submit" value="Confirm order" name="action">
 </p>
+
+<h1>{{ alacarte_type}}</h1>
+
+{% for alkeys, values in price.items() %}
+    {% if alacarte_type == alkeys %}
+    <input class="hidden" value="{{ alkeys }}" name="alkeys" readonly> {{ alkeys }} </input>
+        {% for value in values %}
+        <p>
+        Price:
+        </p>
+        <p>
+        <h2> <input type="number" value="{{ value.get('price') }}" name="value.price" readonly>
+           </h2>
+        </p>
+        <p>
+        <br>
+        Order amount:
+        <div class="number">
+        <span class="minus">-</span>
+        <input type="number" value="{{ value.get('amount') }}" name="value.amount" required>
+        <span class="plus">+</span>
+        </div>
+        </p>
+        {% endfor %}
+    {% endif %}
 {% endfor %}
-<p>
-Order amount:
-<div class="number">
-<span class="minus">-</span>
-<input type="text" value="0">
-<span class="plus">+</span>
-</div>
-</p>
-<p>
-Price:
-</p><p>   <input type="number" value="0">
-</p>
 
+{% if alacarte.get(alacarte_type) %}
+    {% for alkeys, values in alacarte.items() %}
+        {% if alacarte_type == alkeys %}
+            Sauce: <select name="value.flavor" id="al_flavor" required>
+            {% for value in values %}
+                <option value="{{ value.get('flavor') }}" name="{{ value.flavor }}">{{ value.get('flavor') }}</option>
+            {% endfor %}
+            </select>
 
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+</form>
 {% endblock %}
