@@ -38,7 +38,12 @@ a:visited, a:link {
         <li><a href="#" class="navcustom">About</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        {% if 'user' in session %}
+          <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        {% else %}
+          <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        {% endif %}
+
       </ul>
     </div>
   </div>
