@@ -1,4 +1,23 @@
-<nav class="navbar navbar-inverse">
+<style>
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+.navcustom {
+  font-family: 'Lato', sans-serif;
+}
+
+a:visited, a:link {
+  color: #ff928e;
+  padding: 15px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+</style>
+<nav class="navbar" style="background-color: white">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -6,15 +25,17 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{{ url_for('index') }}">UP E-Kiosk</a>
+      <a class="navbar-brand" href="{{ url_for('index') }}">
+        <img src="static/img/logo.png" width="35" height="35"></a>
+                <a class="navbar-brand navcustom" href="{{ url_for('index') }}"> UP E-Kiosk</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class=""><a href="{{ url_for('index') }}">Home</a></li>
-        <li><a href="{{ url_for('basemenu') }}">Menu</a></li>
-        <li><a href="{{ url_for('baseorder') }}">Order</a></li>
-        <li><a href="{{ url_for('cart') }}">Cart</a></li>
-        <li><a href="#">About</a></li>
+        <li class=""><a href="{{ url_for('index') }}" class="navcustom">Home</a></li>
+        <li><a href="{{ url_for('basemenu') }}" class="link navcustom">Menu</a></li>
+        <li><a href="{{ url_for('baseorder') }}" class="navcustom">Order</a></li>
+        <li><a href="{{ url_for('cart') }}" class="navcustom">Cart</a></li>
+        <li><a href="#" class="navcustom">About</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
