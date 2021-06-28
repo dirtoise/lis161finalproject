@@ -13,7 +13,11 @@ def login():
     if request.method == 'POST':
         user = request.form['name']
         session['user'] = user
-        return redirect(url_for('user',))
+        session_data = {
+            'user' :request.form['name'],
+        }
+        insert_user_into_user(session_data)
+        return redirect(url_for('user'))
     else:
         if 'user' in session:
             return redirect(url_for('user',))
@@ -29,6 +33,16 @@ def user():
 
 @app.route('/logout')
 def logout():
+    loginuser = select_dict_user()
+
+    # deletes username in user database on logout #
+    for users in loginuser:
+        if users['username'] == session['user']:
+            users['user_id']
+            username = session['user']
+            delete_user_from_user(username)
+
+    # deletes username in session on logout #
     session.pop('user', None)
     return redirect(url_for('login'))
 
@@ -36,52 +50,81 @@ def logout():
 def basemenu():
     return render_template('basemenu.html')
 
-@app.route('/menu/<meals_type>')
+@app.route('/menu/<meals_type>/')
 def menu(meals_type):
-    return render_template('menu.html',meals_type=meals_type,meals=meals,alacarte=alacarte,combomeals=combomeals,drinks=drinks)
+    meals = read_meals_by_type(meals_type,)
+    alacartedict = select_dict_alacarte_type()
+    return render_template('menu.html',meals_type=meals_type,meals=meals,alacartedict=alacartedict)
 
-@app.route('/menu/<meals_type>/<alacarte_type>/<int:alacarteid>')
-def alacartemeals(meals_type,alacarte_type,alacarteid):
-    #debatable for deletion---
-    for meal in meals:
-        if meal == 'alacarte':
-            alacarte
-    #------------------------
-    alacarteid = alacarteid
-    for keys, values in alacarte.items():
-        for value in values:
-            value = value
-    return render_template('alacartemeals.html',meals=meals,meals_type=meals_type,alacarte=alacarte,alacarte_type=alacarte_type,price=price)
+@app.route('/menu/<meals_type>/<int:alacarte_id>')
+def alacartes(meals_type, alacarte_id):
+    alacarteid = read_alacarte_by_id(alacarte_id)
+    meals = read_meals_by_type(meals_type)
+    flavordict = select_dict_flavors()
+    saucedict = select_dict_sauces()
+    userdict = select_dict_user()
+    return render_template('alacartemeals.html',alacarte_id=alacarte_id, alacarteid=alacarteid,flavordict=flavordict,saucedict=saucedict,meals=meals,userdict=userdict,meals_type=meals_type)
 
 @app.route('/order')
 def baseorder():
     return render_template('order.html')
 
-@app.route('/instprocessing/', methods=['POST'])
-def instprocessing():
-    finalize = False
-    for cartdatas in cartdata:
-        cartdatas=cartdatas
+@app.route('/mealprocessing/', methods=['POST'])
+def mealprocessing():
 
-    cartdata_data = {
-        'alacarte_type' : request.form['alkeys'],
-        'flavor' : request.form['value.flavor'],
+    cart_data = {
+        'user_id': request.form['user_id'],
+        'user' : request.form['username'],
+        'meals_type' : request.form['meals_type'],
+        'alacarte_type' : request.form['alacarte_type'],
+        'amount': request.form['alacarte_amount'],
+        'price': request.form['alacarte_price'],
+        'flavors_type' : request.form['alacarte_flavor'],
+        'sauces_type' : request.form['alacarte_sauce'],
     }
-    cartprice_data = {
-        'price': request.form['value.price'],
-        'amount' : request.form['value.amount'],
-    }
-    if finalize == False:
-        cartdata[cartdatas].append(cartdata_data)
-        cartdata[cartdatas].append(cartprice_data)
 
-    return redirect(url_for('cart'),)
+    insert_alacarte_into_cart(cart_data)
 
+    return redirect(url_for('cart'))
 
-@app.route('/cart')
+@app.route('/cart/',)
 def cart():
-    return render_template('cart.html', instance=instance, cartdata=cartdata, alacarte=alacarte)
+    usercart = select_dict_cart()
+    loginuser = select_dict_user()
 
+    cartchecker = any(usercart)
+
+    if 'user' in select_dict_user():
+        users_id = user.user_id
+
+    return render_template('cart.html', loginuser=loginuser, usercart=usercart, cartchecker=cartchecker)
+
+@app.route('/cart/modify/<int:cart_id>', methods=['POST'])
+def modify(cart_id):
+    usercart = select_dict_cart()
+
+    if request.form['action'] == 'DELETE':
+        delete_cart_from_cart(cart_id)
+        return redirect(url_for('cart', cart_id=cart_id, usercart=usercart))
+
+@app.route('/cart/finalize', methods=['post'])
+def finalize():
+    usercart = select_dict_cart()
+
+    alacarte_flavor = request.form['alacarte_flavor']
+    alacarte_sauce = request.form['alacarte_sauce']
+    alacarte_amount = request.form['alacarte_amount']
+    cart_id = request.form['cart_id']
+
+    cart_data = {
+        'amount': alacarte_amount,
+        'flavors_type' : alacarte_flavor,
+        'sauces_type' : alacarte_sauce,
+        'cart_id': cart_id,
+    }
+    update_cart(cart_data)
+
+    return redirect(url_for('cart', cart_id=cart_id))
 
 # Kiosk route to work on later
 """ 
@@ -89,69 +132,6 @@ def cart():
 def order(kiosk):
     return render_template('kiosk.html')
 """
-
-@app.route('/animals/<pet_type>')
-def animals(pet_type):
-    return render_template('animals.html',pet_type=pet_type, pets=read_pets_by_type(pet_type))
-
-@app.route('/animals/<pet_type>/<int:pet_id>')
-def pet(pet_type, pet_id):
-    pet = read_pets_by_id(pet_id)
-    return render_template('pet_profile.html',pet=pet)
-
-@app.route('/register')
-def register():
-    return render_template('register.html')
-
-@app.route('/processing', methods=['post'])
-def processing():
-    pet_type = request.form['pet_type']
-    pet_name = request.form['pet_name']
-    pet_breed = request.form['pet_breed']
-    pet_url = request.form['pet_url']
-    pet_age = request.form['pet_age']
-    pet_desc = request.form['pet_desc']
-
-    pet_data= {'name' : pet_name,
-               'age' : pet_age,
-               'breed': pet_breed,
-               'url' : pet_url,
-               'description' : pet_desc,
-               'type': pet_type}
-    insert_pet(pet_data)
-    return redirect(url_for('animals', pet_type=pet_type))
-
-@app.route('/modify/pet_type/<int:pet_id>', methods=['POST'])
-def modify(pet_id):
-    pet = read_pets_by_id(pet_id)
-    if request.form['action'] == 'Edit':
-        return render_template('edit.html', pet=pet)
-    elif request.form['action'] == 'Delete':
-        delete_pet(pet_id)
-        return redirect(url_for('animals', pet_type=pet['type']))
-
-@app.route('/update/pet_type/<int:pet_id>', methods=['POST'])
-def update(pet_id):
-    pet_name = request.form['pet_name']
-    pet_age = request.form['pet_age']
-    pet_desc = request.form['pet_desc']
-    pet_breed = request.form['pet_breed']
-    pet_url = request.form['pet_url']
-    pet_type = request.form['pet_type']
-
-    pet_data = {
-        'name': pet_name,
-        'description': pet_desc,
-        'age': pet_age,
-        'breed': pet_breed,
-        'url': pet_url,
-        'type': pet_type,
-        'id': pet_id
-    }
-    update_pet(pet_data)
-    return redirect(url_for('pet', pet_id=pet['id']))
-    pass
-
 
 if __name__ == '__main__':
     app.run(debug=True)
