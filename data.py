@@ -1,486 +1,9 @@
-combo1 = {
-    'pancitcanton' : [
-                                        {
-                                        'flavor': 'classic',
-                                        'url':'',
-                                        'price':'',
-                                        'amnt':'',
-                                        },
-                                        {
-                                        'flavor': 'calamansi',
-                                        'url': '',
-                                        'price':'',
-                                        'amnt':'',
-
-                                        },
-                                        {
-                                        'flavor': 'chili-mansi',
-                                        'url': '',
-                                        'price':'',
-                                        'amnt':'',
-                                        },
-                                        {
-                                        'flavor': 'sweetspicy',
-                                        'url': '',
-                                        'price':'',
-                                        'amnt':'',
-                                        },
-                                        {
-                                        'flavor': 'hotchili',
-                                        'url': '',
-                                        'price':'',
-                                        'amnt':'',
-                                        },
-                    ],
-    'kwek-kwek' : [
-                                {
-                                'sauce': 'plain',
-                                'url': '',
-                                'price':'',
-                                'amnt':'',
-                                },
-                                {
-                                'sauce': 'sweet',
-                                'url': '',
-                                'price':'',
-                                'amnt':'',
-                                },
-                                {
-                                'sauce': 'sweetspicy',
-                                'url': '',
-                                'price':'',
-                                'amnt':'',
-                                },
-                                {
-                                'sauce': 'vinegarsauce',
-                                'url': '',
-                                'price':'',
-                                'amnt':'',
-                                },
-                                {
-                                'sauce': 'sweetvinegarsauce',
-                                'url': '',
-                                'price':'',
-                                'amnt':'',
-                                }
-                    ],
-}
-combo2 = {
-    'pancitcanton' : [
-                                        {
-                                        'flavor': 'classic',
-                                        'url':'',
-                                        'price':'',
-                                        'amnt':'',
-                                        },
-                                        {
-                                        'flavor': 'calamansi',
-                                        'url': '',
-                                        'price':'',
-                                        'amnt':'',
-
-                                        },
-                                        {
-                                        'flavor': 'chili-mansi',
-                                        'url': '',
-                                        'price':'',
-                                        'amnt':'',
-                                        },
-                                        {
-                                        'flavor': 'sweetspicy',
-                                        'url': '',
-                                        'price':'',
-                                        'amnt':'',
-                                        },
-                                        {
-                                        'flavor': 'hotchili',
-                                        'url': '',
-                                        'price':'',
-                                        'amnt':'',
-                                        },
-                    ],
-    'kikiam': [
-        {
-            'sauce': 'plain',
-            'url': '',
-            'price': '',
-            'amnt': '',
-        },
-        {
-            'sauce': 'sweet',
-            'url': '',
-            'price': '',
-            'amnt': '',
-        },
-        {
-            'sauce': 'sweetspicy',
-            'url': '',
-            'price': '',
-            'amnt': '',
-        },
-        {
-            'sauce': 'vinegarsauce',
-            'url': '',
-            'price': '',
-            'amnt': '',
-        },
-        {
-            'sauce': 'sweetvinegarsauce',
-            'url': '',
-            'price': '',
-            'amnt': '',
-        }
-    ],
-}
-combo3 = {
-    'pancit canton' : [
-                                        {
-                                        'flavor': 'classic',
-                                        'url':'',
-                                        'price':'',
-                                        'amnt':'',
-                                        },
-                                        {
-                                        'flavor': 'calamansi',
-                                        'url': '',
-                                        'price':'',
-                                        'amnt':'',
-
-                                        },
-                                        {
-                                        'flavor': 'chili-mansi',
-                                        'url': '',
-                                        'price':'',
-                                        'amnt':'',
-                                        },
-                                        {
-                                        'flavor': 'sweetspicy',
-                                        'url': '',
-                                        'price':'',
-                                        'amnt':'',
-                                        },
-                                        {
-                                        'flavor': 'hotchili',
-                                        'url': '',
-                                        'price':'',
-                                        'amnt':'',
-                                        },
-                    ],
-    'fishball': [
-        {
-            'sauce': 'plain',
-            'url': '',
-            'price': '',
-            'amnt': '',
-        },
-        {
-            'sauce': 'sweet',
-            'url': '',
-            'price': '',
-            'amnt': '',
-        },
-        {
-            'sauce': 'sweetspicy',
-            'url': '',
-            'price': '',
-            'amnt': '',
-        },
-        {
-            'sauce': 'vinegarsauce',
-            'url': '',
-            'price': '',
-            'amnt': '',
-        },
-        {
-            'sauce': 'sweetvinegarsauce',
-            'url': '',
-            'price': '',
-            'amnt': '',
-        }
-    ],
-}
-
-price = {
-    'pancitcanton' : [
-        {
-            'price': '20',
-            'amount': '0',
-        },
-                    ],
-    'kwek-kwek' : [
-        {
-            'price': '5',
-            'amount': '0',
-        },
-                    ],
-    'kikiam' : [
-        {
-            'price': '3',
-            'amount': '0',
-        },
-                ],
-    'fishball' : [
-        {
-            'price': '2',
-            'amount': '0',
-        },
-            ],
-    'squidball' :  [
-        {
-            'price': '2',
-            'amount': '0',
-        },
-    ],
-    'chickenball' : [
-        {
-            'price': '2',
-            'amount': '0',
-        },
-    ],
-}
-
-alacarte = {
-    'pancitcanton' : [
-                                        {
-                                        'flavor': 'classic',
-                                        'url':'https://www.adiplomata.com/wp-content/uploads/2020/03/3562.jpg',
-                                        },
-                                        {
-                                        'flavor': 'calamansi',
-                                        'url': 'https://cdn.shopify.com/s/files/1/0275/0935/8707/products/533154_2400x1789_780205a9-a113-4682-96da-54bdda755985_1200x895.jpg?v=1598751152',
-
-                                        },
-                                        {
-                                        'flavor': 'chili-mansi',
-                                        'url': 'https://cdn.shopify.com/s/files/1/2713/3026/products/lucky-me-pancit-canton-chilli-mansi-instant-noodles-60g-65-p_600x.jpg?v=1545281033',
-                                        },
-                                        {
-                                        'flavor': 'sweetspicy',
-                                        'url': 'https://cdn.shopify.com/s/files/1/0275/0935/8707/products/533160_2400x1937_50388313-a7a0-4a2f-9aa7-c39719f620e7_868x700.jpg?v=1598751230',
-                                        },
-                                        {
-                                        'flavor': 'hotchili',
-                                        'url': 'https://cdn.shopify.com/s/files/1/2713/3026/products/instant-pancit-canton-hot-chilli-flavor-von-lucky-me-60g_600x.jpg?v=1545281034',
-                                        },
-                    ],
-    'kwek-kwek' : [
-                                {
-                                'flavor': 'plain',
-                                'url': '',
-                                },
-                                {
-                                'flavor': 'sweet',
-                                'url': '',
-                                },
-                                {
-                                'flavor': 'sweetspicy',
-                                'url': '',
-                                },
-                                {
-                                'flavor': 'vinegarsauce',
-                                'url': '',
-                                },
-                                {
-                                'flavor': 'sweetvinegarsauce',
-                                'url': '',
-                                }
-],
-    'kikiam' : [
-                                {
-                                'flavor': 'plain',
-                                'url': '',
-                                },
-                                {
-                                'flavor': 'sweet',
-                                'url': '',
-                                },
-                                {
-                                'flavor': 'sweetspicy',
-                                'url': '',
-                                },
-                                {
-                                'flavor': 'vinegarsauce',
-                                'url': '',
-                                },
-                                {
-                                'flavor': 'sweetvinegarsauce',
-                                'url': '',
-                                }
-],
-    'fishball' : [
-                                {
-                                'flavor': 'plain',
-                                'url': '',
-                                },
-                                {
-                                'flavor': 'sweet',
-                                'url': '',
-                                },
-                                {
-                                'flavor': 'sweetspicy',
-                                'url': '',
-                                },
-                                {
-                                'flavor': 'vinegarsauce',
-                                'url': '',
-                                },
-                                {
-                                'flavor': 'sweetvinegarsauce',
-                                'url': '',
-                                }
-],
-    'squidball' :  [
-                                {
-                                'flavor': 'plain',
-                                'url': '',
-                                },
-                                {
-                                'flavor': 'sweet',
-                                'url': '',
-                                },
-                                {
-                                'flavor': 'sweetspicy',
-                                'url': '',
-                                },
-                                {
-                                'flavor': 'vinegarsauce',
-                                'url': '',
-                                },
-                                {
-                                'flavor': 'sweetvinegarsauce',
-                                'url': '',
-                                }
-],
-    'chickenball' : [
-                                {
-                                'flavor': 'plain',
-                                'url': '',
-                                },
-                                {
-                                'flavor': 'sweet',
-                                'url': '',
-                                },
-                                {
-                                'flavor': 'sweetspicy',
-                                'url': '',
-                                },
-                                {
-                                'flavor': 'vinegarsauce',
-                                'url': '',
-                                },
-                                {
-                                'flavor': 'sweetvinegarsauce',
-                                'url': '',
-                                }
-],
-}
-
-
-drinks = {
-    'water': [
-        {
-            'price': '',
-            'url': '',
-            'price':'',
-            'amnt': '',
-        },
-    ],
-    'buko juice': [
-        {
-            'price': '',
-            'url': '',
-            'price':'',
-            'amnt': '',
-        },],
-    'sprite': [
-        {
-            'price': '',
-            'url': '',
-            'price':'',
-            'amnt': '',
-        },
-    ],
-}
-
-combomeals = {
-    'combo1' : combo1,
-    'combo2' : combo2,
-    'combo3' : combo3
-}
-meals = {
-    'combomeals' : combomeals,
-    'alacarte' : alacarte,
-    'drinks' : drinks
-}
-instance = {
-    'guest' : [{
-            'name':'arl',
-            'cid': 0,
-        },
-            ],
-}
-
-cartdata = { 'guest': [{ 'alacarte_type' : '',
-                         'flavor' : '',
-                         },{
-                         'amount' :'',
-                         'price' : '',
-                        },]
-}
-
-cartprice = { 'guest': [{'amount' : '',
-                         'price' : '',}
-                       ],
-
-}
-
 #nav sidebar active
 active = 'active'
 
-
-
-
-pets = {
-    'dogs': [
-        {
-            'name': 'Spot',
-            'age': 2,
-            #'breed': 'Dalmatian',
-            'description': 'Spot is an energetic puppy who seeks fun and adventure!',
-            'url': 'https://content.codecademy.com/programs/flask/introduction-to-flask/dog-spot.jpeg'
-        },
-        {
-            'name': 'Shadow',
-            'age': 4,
-            'breed': 'Border Collie',
-            'description': 'Eager and curious, Shadow enjoys company and can always be found tagging along at your heels!',
-            'url': 'https://content.codecademy.com/programs/flask/introduction-to-flask/dog-shadow.jpeg'
-        }
-    ],
-    'cats': [
-        {
-            'name': 'Snowflake',
-            'age': 1,
-            'breed': 'Tabby',
-            'description': 'Snowflake is a playful kitten who loves roaming the house and exploring.',
-            'url': 'https://content.codecademy.com/programs/flask/introduction-to-flask/cat-snowflake.jpeg'
-        }
-    ],
-    'rabbits': [
-        {
-            'name': 'Easter',
-            'age': 4,
-            'breed': 'Mini Rex',
-            'description': 'Easter is a sweet, gentle rabbit who likes spending most of the day sleeping.',
-            'url': 'https://content.codecademy.com/programs/flask/introduction-to-flask/rabbit-easter.jpeg'
-        }
-    ]
-}
-
-
 import sqlite3
 
-db_path = 'pa.db'
+db_path = 'pb.db'
 
 def connect_db(path):
     conn = sqlite3.connect(path)
@@ -488,51 +11,121 @@ def connect_db(path):
     conn.row_factory = sqlite3.Row
     return (conn, conn.cursor())
 
-def read_pets_by_type(pet_type):
+def insert_user_into_user(session):
     conn, cur = connect_db(db_path)
-    query = 'SELECT * FROM pets WHERE type=?'
-    results = cur.execute(query, (pet_type,)).fetchall()
-    conn.close()
-    return results
-
-def read_pets_by_id(pet_id):
-    conn, cur = connect_db(db_path)
-    query = 'SELECT * FROM pets WHERE id=?'
-    results = cur.execute(query, (pet_id,)).fetchone()
-    conn.close()
-    return results
-
-def insert_pet(pet_data):
-    conn, cur = connect_db(db_path)
-    query = 'INSERT INTO pets (name, age, description, breed, url, type) VALUES (?, ?, ?, ?, ?, ?)'
-    values = (pet_data['name'],
-              pet_data['age'],
-              pet_data['description'],
-              pet_data['breed'],
-              pet_data['url'],
-              pet_data['type'],)
+    query = 'INSERT INTO user (username) VALUES (?)'
+    values = (session['user'],)
     cur.execute(query, values)
     conn.commit()
     conn.close()
 
-def delete_pet(pet_id):
+def read_user_by_id(user_id):
     conn, cur = connect_db(db_path)
-    query = 'DELETE FROM pets WHERE id=?'
-    cur.execute(query, (pet_id,))
+    query = 'SELECT * FROM user WHERE user_id=?'
+    results = cur.execute(query, (user_id,)).fetchone()
+    conn.close()
+    return results
+
+def delete_user_from_user(username):
+    conn, cur = connect_db(db_path)
+    query = 'DELETE FROM user WHERE username=?'
+    cur.execute(query, (username,))
     conn.commit()
     conn.close()
 
-def update_pet(pet_data):
+def select_dict_user():
     conn, cur = connect_db(db_path)
-    query = 'UPDATE pets SET name=?, age=?, description=?, breed=?, url=?, type=? WHERE id=?'
-    values = (pet_data['name'],
-              pet_data['age'],
-              pet_data['description'],
-              pet_data['breed'],
-              pet_data['url'],
-              pet_data['type'],
-              pet_data['id'],
+    query = 'SELECT * FROM user'
+    results = cur.execute(query,).fetchall()
+    return results
+
+def select_dict_meals():
+    conn, cur = connect_db(db_path)
+    query = 'SELECT * FROM meals'
+    results = cur.execute(query,).fetchall()
+    return results
+
+def read_meals_by_type(meals_type):
+    conn, cur = connect_db(db_path)
+    query = 'SELECT * FROM meals WHERE meals_type=?'
+    results = cur.execute(query, (meals_type,)).fetchone()
+    conn.close()
+    return results
+
+def select_dict_alacarte_type():
+    conn, cur = connect_db(db_path)
+    query = 'SELECT * FROM alacarte'
+    results = cur.execute(query,).fetchall()
+    return results
+
+def read_alacarte_by_id(alacarte_id):
+    conn, cur = connect_db(db_path)
+    query = 'SELECT * FROM alacarte WHERE alacarte_id=?'
+    results = cur.execute(query, (alacarte_id,)).fetchone()
+    conn.close()
+    return results
+
+def select_dict_flavors():
+    conn, cur = connect_db(db_path)
+    query = 'SELECT * FROM flavors'
+    results = cur.execute(query, ()).fetchall()
+    conn.close()
+    return results
+
+def select_dict_sauces():
+    conn, cur = connect_db(db_path)
+    query = 'SELECT * FROM sauces'
+    results = cur.execute(query, ()).fetchall()
+    conn.close()
+    return results
+
+def select_dict_cart():
+    conn, cur = connect_db(db_path)
+    query = 'SELECT * FROM cart'
+    results = cur.execute(query, ()).fetchall()
+    conn.close()
+    return results
+
+def read_cart_by_id(cart_id):
+    conn, cur = connect_db(db_path)
+    query = 'SELECT * FROM cart WHERE cart_id=?'
+    results = cur.execute(query, (cart_id,)).fetchone()
+    conn.close()
+    return results
+
+def insert_alacarte_into_cart(cart_data):
+    conn, cur = connect_db(db_path)
+    query = 'INSERT INTO cart (user_id, user, meals_type, alacarte_type, amount, price, flavors_type, sauces_type) VALUES (?,?,?,?,?,?,?,?)'
+    values = (
+              cart_data['user_id'],
+              cart_data['user'],
+              cart_data['meals_type'],
+              cart_data['alacarte_type'],
+              cart_data['amount'],
+              cart_data['price'],
+              cart_data['flavors_type'],
+              cart_data['sauces_type']
               )
     cur.execute(query, values)
+    conn.commit()
+    conn.close()
+
+def delete_cart_from_cart(cart_id):
+    conn, cur = connect_db(db_path)
+    query = 'DELETE FROM cart WHERE cart_id=?'
+    cur.execute(query, (cart_id,))
+    conn.commit()
+    conn.close()
+
+def update_cart(cart_data):
+    conn, cur = connect_db(db_path)
+    query ='UPDATE cart SET amount=?, flavors_type=?, sauces_type=? WHERE cart_id=?'
+    values = (
+            cart_data['amount'],
+            cart_data['flavors_type'],
+            cart_data['sauces_type'],
+            cart_data['cart_id']
+    )
+    cur.execute(query,values)
     conn.commit()
     conn.close()

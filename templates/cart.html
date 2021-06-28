@@ -2,33 +2,265 @@
 
 {% block content %}
 
-<h1>Cart:</h1>
-<br>
-<form action="/menu">
-    <input class="custom-btn btn-11" type="submit" value="Add more" name="action"></form>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700');
 
-<form action="">
-    <input class="custom-btn btn-11" type="submit" value="Finalize order" name="action"></form>
-</br>
-<br>
-<select name="order_type" id="o_type">
-    <option selected> ...</option>
-    <option value="delivery">Delivery</option>
-    <option value="pickup">Pickup</option>
-</select>
-<br>
-    <!-- for testing if data was succesfully passed --!>
-     {{ instance }}! This is your order: {{ cartdata }}
+$base-spacing-unit: 24px;
+$half-spacing-unit: $base-spacing-unit / 2;
 
+$color-alpha: #1772FF;
+$color-form-highlight: #EEEEEE;
 
-<p>
-{% for items, values in cartdata.items() %}
-    <br> Hello {{ items|title }} ! This is your order:
-    {% for value in values %}
-       {{ value['alacarte_type'] }} {{ value['flavor'] }} {{ value['amount'] }} {{ value['price'] }}
-    {% endfor %}
+*, *:before, *:after {
+	box-sizing:border-box;
+}
+
+.custom-btn {
+  width: 70px;
+  height: 30px;
+  padding: 0px 0px;
+  border: 2px solid #ff928e;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.btn-11 {
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.btn-11:hover {
+  background: #ff928e;
+  color: #fff;
+}
+.btn-11:before {
+    position: absolute;
+    content: '';
+    display: inline-block;
+    top: -180px;
+    left: 0;
+    width: 30px;
+    height: 100%;
+    background-color: #fff;
+    animation: shiny-btn1 3s ease-in-out infinite;
+}
+.btn-11:active{
+  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.3),
+              -4px -4px 6px 0 rgba(116, 125, 136, .2),
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
+}
+
+@-webkit-keyframes shiny-btn1 {
+    0% { -webkit-transform: scale(0) rotate(45deg); opacity: 0; }
+    80% { -webkit-transform: scale(0) rotate(45deg); opacity: 0.5; }
+    81% { -webkit-transform: scale(4) rotate(45deg); opacity: 1; }
+    100% { -webkit-transform: scale(50) rotate(45deg); opacity: 0; }
+}
+
+.container {
+	max-width: 100%;
+	margin-right:auto;
+	margin-left:auto;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	min-height:;
+}
+
+.table {
+	width:100%;
+	border:1px solid $color-form-highlight;
+}
+
+.table-header {
+	display:flex;
+	height:50px;
+	width:100%;
+	background:#000;
+	padding:($half-spacing-unit * 1.5) 0;
+}
+
+.table-row {
+	display:flex;
+	width:100%;
+	padding:($half-spacing-unit * 1.5) 0;
+
+	&:nth-of-type(odd) {
+		background:$color-form-highlight;
+	}
+}
+
+.table-data, .header__item {
+	flex: 1 1 20%;
+	text-align:center;
+}
+
+.header__item {
+	text-transform:uppercase;
+}
+
+h16 {
+	color:white;
+	text-decoration: none;
+	position:relative;
+	display:inline-block;
+	top: 30%;
+	padding-left:$base-spacing-unit;
+	padding-right:$base-spacing-unit;
+
+	&::after {
+		content:'';
+		position:absolute;
+		right:-($half-spacing-unit * 1.5);
+		color:white;
+		font-size:$half-spacing-unit;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	&.desc::after {
+		content: '(desc)';
+	}
+
+	&.asc::after {
+		content: '(asc)';
+	}
+
+}
+</style>
+
+{% if cartchecker == True %}
+
+<div class="container">
+	<div class="table">
+		<div class="table-header">
+			<div class="header__item"><h16></h16></div>
+			<div class="header__item"><h16>Cart order</h16></div>
+			<div class="header__item"><h16></h16></div>
+			<div class="header__item"><h16>Meal type</h16></div>
+			<div class="header__item"><h16>Price</h16></div>
+			<div class="header__item"><h16>Amount</h16></div>
+            <div class="header__item"><h16>Edit</h16></div>
+            <div class="header__item"><h16>Delete</h16></div>
+            <div class="header__item"><h16>Total</h16></div>
+		</div>
+{% for userdata in usercart %}
+    <form action="{{ url_for('finalize') }}" method="post">
+
+		<div class="table-content">
+			<br><div class="table-row">
+				<div class="table-data"><input class="hidden" id="cart_id" name="cart_id" value="{{ userdata.cart_id }}" readonly>
+                </div>
+				<div class="table-data">{{ userdata.alacarte_type|title }}</div>
+                <div class="table-data">
+                {% if userdata.sauces_type == 'NULL' %}
+                    <input class="hidden" id="scs_type" name="alacarte_sauce" value="{{ userdata.sauces_type }}" readonly>
+                {% else %}
+
+                    <select name="alacarte_sauce" id="scs_type" style="width: 100px;">
+                        {% if userdata.sauces_type == 'plain' %}
+                        <option value="plain" selected>Plain</option>
+                        {% else %}
+                        <option value="plain">Plain</option>
+                        {% endif %}
+                        {% if userdata.sauces_type == 'sweet' %}
+                        <option value="sweet" selected>Sweet</option>
+                        {% else %}
+                        <option value="sweet">Sweet</option>
+                        {% endif %}
+                        {% if userdata.sauces_type == 'sweet & spicy' %}
+                        <option value="sweet & spicy" selected>Sweet & Spicy</option>
+                        {% else %}
+                        <option value="sweet & spicy">Sweet & Spicy</option>
+                        {% endif %}
+                        {% if userdata.sauces_type == 'vinegar dip' %}
+                        <option value="vinegar dip" selected>Vinegar Dip</option>
+                        {% else %}
+                        <option value="vinegar dip">Vinegar Dip</option>
+                        {% endif %}
+                        {% if userdata.sauces_type == 'sweet & spicy and vinegar dip' %}
+                        <option value="sweet & spicy and vinegar dip" selected>Sweet & Spicy and Vinegar Dip</option>
+                        {% else %}
+                        <option value="sweet & spicy and vinegar dip">Sweet & Spicy and Vinegar Dip</option>
+                        {% endif %}
+                    </select>
+                {% endif %}
+                {% if userdata.flavors_type == 'NULL' %}
+                    <input class="hidden" id="fl_type" name="alacarte_flavor" value="{{ userdata.flavors_type }}" readonly>
+                {% else %}
+
+                    <select name="alacarte_flavor" id="fl_type" style="width: 100px;">
+                        {% if userdata.flavors_type == 'classic' %}
+                        <option value="classic" selected>Classic</option>
+                        {% else %}
+                        <option value="classic">Classic</option>
+                        {% endif %}
+                        {% if userdata.flavors_type == 'calamansi' %}
+                        <option value="calamansi" selected>Calamansi</option>
+                        {% else %}
+                        <option value="calamansi">Calamansi</option>
+                        {% endif %}
+                        {% if userdata.flavors_type == 'chili-mansi' %}
+                        <option value="chili-mansi" selected>Chili-mansi</option>
+                        {% else %}
+                        <option value="chili-mansi">Chili-mansi</option>
+                        {% endif %}
+                        {% if userdata.flavors_type == 'sweet & spicy' %}
+                        <option value="sweet & spicy" selected>Sweet & Spicy</option>
+                        {% else %}
+                        <option value="sweet & spicy">Sweet & Spicy</option>
+                        {% endif %}
+                        {% if userdata.flavors_type == 'hot-chili' %}
+                        <option value="hot-chili" selected>Hot-chili</option>
+                        {% else %}
+                        <option value="hot-chili">Hot-chili</option>
+                        {% endif %}
+                    </select>
+                {% endif %}
+
+                </div>
+				<div class="table-data">{{ userdata.meals_type }}</div>
+				<div class="table-data">{{ userdata.price }}</div>
+				<div class="table-data"><input style="width:60px" type="number" id="alacarte_amount" name="alacarte_amount" value="{{ userdata.amount }}">
+                </div>
+                <div class="table-data"><input class="custom-btn btn-11" type="submit" value="EDIT" name="action">
+                </div>
+    </form>
+
+                <div class="table-data">
+                    <form action ="{{ url_for('modify', cart_id=userdata.cart_id) }}" method="post">
+                        <input class="custom-btn btn-11" type="submit" value="DELETE" name="action">
+                    </form>
+                </div>
+                <div class="table-data"></div>
+
+			    </div>
+		</div>
+
 {% endfor %}
-</p>
-<p> Total amount: </p>
+	</div>
+</div>
+
+    <form action="/menu">
+        <input class="custom-btn btn-11" type="submit" value="Add more" name="action">
+    </form>
+
+    </br>
+    <select name="order_type" id="o_type">
+        <option selected> ...</option>
+        <option value="delivery">Delivery</option>
+        <option value="pickup">Pickup</option>
+    </select>
+
+{% else %}
+    <h1> There doesn't seem to be anything in here.</h1>
+
+{% endif %}
+
 
 {% endblock %}
