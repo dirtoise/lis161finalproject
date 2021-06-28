@@ -65,45 +65,38 @@
 
 </style>
 {% include 'menusidebar.html' %}
-<div>
-  <h1>{{ meals_type.title() }}</h1>
-  <div class="row">
-    {% for meal in meals %}
-      {% if meal == meals_type %}
-        {% if meal == 'combomeals' %}
-          {% for fdtype in combomeals %}
-            <a href="/menu/{{ meals_type }}/"></a>
-              <div class="col-sm-3">
-                <div class="well">
-                <p><h4><input class="btn-11" type="submit" value="{{ fdtype }}" name="action"></p></h4>
-                </div>
-              </div>
-          {% endfor %}
-        {% elif meal == 'alacarte' %}
-          {% for alacarte_type,values in alacarte.items() %}
+<h1>{{ meals_type }}</h1>
+    <div>
+    <div class="row">
+    {% if meals['meals_type'] == 'combomeals' %}
+        <a href="/menu/{{ meals_type }}/"></a>
+        <div class="col-sm-3">
+        <div class="well">
+        <p><h4><input class="btn-11" type="submit" value="{{ meals_type }}" name="action"></p></h4>
+        </div>
+        </div>
+    {% elif meals['meals_type'] == 'alacarte' %}
+        {% for alacartemeals in alacartedict %}
             <div class="col-sm-3">
-              <div class="well">
-              <p>
-                <h4>{{ alacarte_type }}<form action="/menu/alacarte/{{ alacarte_type }}/{{ loop.index }}">
-                <input class="btn-11" type="submit" value="Add to cart" name="{{ alacarte_type }}">   </p></h4>
-              </form>
-              </div>
+            <div class="well">
+            <p><h4>{{ alacartemeals.alacarte_type }} </h4>
+            <form action="{{ url_for('alacartes',meals_type=meals_type,alacarte_id=alacartemeals.alacarte_id) }}">
+            <input class="btn-11" type="submit" value="Add to cart" name="{{ alacartemeals.alacarte_type }}"></p>
+            </form>
             </div>
-          {% endfor %}
-        {% else %}
-          {% for fdtype in drinks %}
-            <a href="/menu/{{ meals_type }}/"></a>
-              <div class="col-sm-3">
-                <div class="well">
-                <p><h4>
-                  <input class="btn-11" type="submit" value="{{ fdtype }}" name="action"></input></p></h4>
-                </div>
-              </div>
-          {% endfor %}
-        {% endif %}
-      {% endif %}
-    {% endfor %}
-  </div>
-  </p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <a href="/menu/{{ meals['meals_type'] }}/"></a>
+        <div class="col-sm-3">
+        <div class="well">
+        <p><h4>
+        <input class="btn-11" type="submit" value="{{ meals['meals_type'] }}" name="action"></p></h4>
+        </div>
+        </div>
+    {% endif %}
+    </div>
+    </div>
+
 
 {% endblock %}
