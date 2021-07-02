@@ -1,9 +1,46 @@
-<div class="container-fluid">
+<style>
+.sidenav {
+  height: 542px;
+  width: 20.3%;
+  position: left;
+  z-index: 1;
+  top: 0;
+  bottom: 100%;
+  left: 0;
+  background-color: #ff928e;
+  overflow-x: hidden;
+}
+
+.navcustom {
+  font-family: 'Lato', sans-serif;
+}
+
+.sidenav a {
+  color: white;
+  padding: 16px;
+  text-decoration: none;
+  display: inline;
+}
+
+/* Change color on hover */
+.sidenav a:hover {
+  background-color: #ddd;
+  color: #ff928e;
+  width:100%;
+}
+
+.sidefont {
+  font-family: 'Lato', sans-serif;
+  color: #ff928e;
+}
+</style>
+
+<div class="container-fluid navcustom">
+  <h2 class="sidefont">U.P. E-KIOSK</h2>
   <div class="row content">
     <div class="col-sm-3 sidenav hidden-xs">
-      <h2>THE UP E-KIOSK MENU</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="/menu">On The Menu</a></li>
+      <ul class="nav nav-stacked">
+        <li class=""><a href="/menu">On The Menu</a></li>
         <li class=""><a href="/menu/combomeals">Combo Meals</a></li>
         <li class=""><a href="/menu/alacarte">À la Carte</a></li>
         <li class=""><a href="/menu/drinks">Drinks</a></li>

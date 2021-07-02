@@ -62,23 +62,48 @@
 .btn-3 span:hover:after {
   width: 100%;
 }
+#name a {
+  display: inline-block; /* add this line */
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  margin-bottom: 5px;
+}
 
+#name a:hover {
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  margin-bottom: 5px;
+  cursor: pointer;
+  -o-transition: .5s;
+  -ms-transition: .5s;
+  -moz-transition: .5s;
+  -webkit-transition: .5s;
+}
+
+#name a {
+    border:solid 0px red;
+    background-color: orange;
+    z-index: 999;
+}
 </style>
 {% include 'menusidebar.html' %}
-<h1>{{ meals_type }}</h1>
-    <div>
+<div class="col-sm-8">
     <div class="row">
     {% if meals['meals_type'] == 'combomeals' %}
+        <h1 style="text-indent:10px"><input class="hidden" value="{{ meals_type }}" readonly>COMBO MEALS</h1>
         <a href="/menu/{{ meals_type }}/"></a>
         <div class="col-sm-3">
         <div class="well">
-        <p><h4><input class="btn-11" type="submit" value="{{ meals_type }}" name="action"></p></h4>
+        <p><h4><input class="btn-11" type="submit" value="MAINTENANCE" name="action"></p></h4>
         </div>
         </div>
     {% elif meals['meals_type'] == 'alacarte' %}
+        <h1 style="text-indent:10px"><input class="hidden" value="{{ meals_type }}" readonly>A LA CARTE</h1>
         {% for alacartemeals in alacartedict %}
             <div class="col-sm-3">
-            <div class="well">
+            <div class="well" id="name">
             <p><h4>{{ alacartemeals.alacarte_type }} </h4>
             <form action="{{ url_for('alacartes',meals_type=meals_type,alacarte_id=alacartemeals.alacarte_id) }}">
             <input class="btn-11" type="submit" value="Add to cart" name="{{ alacartemeals.alacarte_type }}"></p>
@@ -87,6 +112,7 @@
             </div>
         {% endfor %}
     {% else %}
+        <h1 style="text-indent:10px"><input class="hidden" value="{{ meals_type }}" readonly>DRINKS</h1>
         <a href="/menu/{{ meals['meals_type'] }}/"></a>
         <div class="col-sm-3">
         <div class="well">
@@ -96,7 +122,6 @@
         </div>
     {% endif %}
     </div>
-    </div>
-
+</div>
 
 {% endblock %}

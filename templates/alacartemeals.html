@@ -70,18 +70,20 @@ display: inline;
 }
 </style>
 {% include 'menusidebar.html' %}
-
+  <div class="col-sm-8">
 <form action="/menu/alacarte">
-    <br>
+    <div class="container">
+        <div class="col-sm-8">
     <input class="custom-btn btn-11" type="submit" value="Go back" name="action">
 </form>
-
-<p>
+        </div>
+        <div class="col">
 <form action="{{ url_for('mealprocessing') }}" method="post">
+        </div>
 
 {% for userdata in userdict %}
-    <input class="hidden" id="username" name="username" value="{{ userdata.username }}" readonly>
-    <input class="hidden" id="user_id" name="user_id" value="{{ userdata.user_id }}" readonly>
+    <input class="hidden" id="username" name="username" value="{{ username }}" readonly>
+    <input class="hidden" id="user_id" name="user_id" value="{{ user_id }}" readonly>
 {% endfor %}
     <input class="custom-btn btn-11" type="submit" value="Confirm order" name="action">
 </p>
@@ -126,5 +128,5 @@ display: inline;
 
 
 </form>
-
+  </div>
 {% endblock %}

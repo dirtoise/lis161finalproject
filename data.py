@@ -95,7 +95,7 @@ def read_cart_by_id(cart_id):
 
 def insert_alacarte_into_cart(cart_data):
     conn, cur = connect_db(db_path)
-    query = 'INSERT INTO cart (user_id, user, meals_type, alacarte_type, amount, price, flavors_type, sauces_type) VALUES (?,?,?,?,?,?,?,?)'
+    query = 'INSERT INTO cart (user_id, user, meals_type, alacarte_type, amount, price, flavors_type, sauces_type, total_amount) VALUES (?,?,?,?,?,?,?,?,?)'
     values = (
               cart_data['user_id'],
               cart_data['user'],
@@ -104,8 +104,9 @@ def insert_alacarte_into_cart(cart_data):
               cart_data['amount'],
               cart_data['price'],
               cart_data['flavors_type'],
-              cart_data['sauces_type']
-              )
+              cart_data['sauces_type'],
+              cart_data['total_amount'],
+    )
     cur.execute(query, values)
     conn.commit()
     conn.close()
@@ -119,12 +120,13 @@ def delete_cart_from_cart(cart_id):
 
 def update_cart(cart_data):
     conn, cur = connect_db(db_path)
-    query ='UPDATE cart SET amount=?, flavors_type=?, sauces_type=? WHERE cart_id=?'
+    query ='UPDATE cart SET amount=?, flavors_type=?, sauces_type=?, total_amount=? WHERE cart_id=?'
     values = (
             cart_data['amount'],
             cart_data['flavors_type'],
             cart_data['sauces_type'],
-            cart_data['cart_id']
+            cart_data['total_amount'],
+            cart_data['cart_id'],
     )
     cur.execute(query,values)
     conn.commit()

@@ -81,7 +81,7 @@ $color-form-highlight: #EEEEEE;
 	display:flex;
 	height:50px;
 	width:100%;
-	background:#000;
+	background:#ff928e;
 	padding:($half-spacing-unit * 1.5) 0;
 }
 
@@ -134,8 +134,11 @@ h16 {
 }
 </style>
 
-{% if cartchecker == True %}
 
+{% if cartchecker == True %}
+    {% for users in loginuser %}
+        <a href="{{ url_for('checkout', user_id= users.user_id, users= users.username) }}">CHECK OUT</a>
+    {% endfor %}
 <div class="container">
 	<div class="table">
 		<div class="table-header">
@@ -145,12 +148,12 @@ h16 {
 			<div class="header__item"><h16>Meal type</h16></div>
 			<div class="header__item"><h16>Price</h16></div>
 			<div class="header__item"><h16>Amount</h16></div>
-            <div class="header__item"><h16>Edit</h16></div>
-            <div class="header__item"><h16>Delete</h16></div>
+            <div class="header__item"><h16></h16></div>
+            <div class="header__item"><h16></h16></div>
             <div class="header__item"><h16>Total</h16></div>
 		</div>
 {% for userdata in usercart %}
-    <form action="{{ url_for('finalize') }}" method="post">
+    <form action="{{ url_for('edit') }}" method="post">
 
 		<div class="table-content">
 			<br><div class="table-row">
@@ -225,7 +228,8 @@ h16 {
 
                 </div>
 				<div class="table-data">{{ userdata.meals_type }}</div>
-				<div class="table-data">{{ userdata.price }}</div>
+				<div class="table-data"><input type="hidden" id="price" name="price" value="{{ userdata.price }}" readonly>
+                    {{ userdata.price }}</div>
 				<div class="table-data"><input style="width:60px" type="number" id="alacarte_amount" name="alacarte_amount" value="{{ userdata.amount }}">
                 </div>
                 <div class="table-data"><input class="custom-btn btn-11" type="submit" value="EDIT" name="action">
@@ -233,18 +237,21 @@ h16 {
     </form>
 
                 <div class="table-data">
-                    <form action ="{{ url_for('modify', cart_id=userdata.cart_id) }}" method="post">
+                    <form action ="{{ url_for('delete', cart_id=userdata.cart_id) }}" method="post">
                         <input class="custom-btn btn-11" type="submit" value="DELETE" name="action">
                     </form>
                 </div>
-                <div class="table-data"></div>
-
+                <div class="table-data">
+                    <input type="hidden" id="total_amount" name="total_amount" value="{{ userdata.total_amount }}" readonly>
+                    {{ userdata.total_amount }}
+                </div>
 			    </div>
 		</div>
-
 {% endfor %}
 	</div>
 </div>
+Total Price: {{ totalprice }}
+
 
     <form action="/menu">
         <input class="custom-btn btn-11" type="submit" value="Add more" name="action">
