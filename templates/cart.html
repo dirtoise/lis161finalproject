@@ -136,9 +136,19 @@ h16 {
 
 
 {% if cartchecker == True %}
-    {% for users in loginuser %}
-        <a href="{{ url_for('checkout', user_id= users.user_id, users= users.username) }}">CHECK OUT</a>
-    {% endfor %}
+
+<div class="col-sm-3">
+<form action="/menu">
+    <input class="custom-btn btn-11" type="submit" value="Add more" name="action">
+</form>
+
+{% for users in loginuser %}
+    <form action="{{ url_for('checkout', user_id= users.user_id, users= users.username) }}" method="post">
+        <input class="custom-btn btn-11" type="submit" name="CHECK OUT" value="CHECK OUT"></button>
+    </form>
+{% endfor %}
+</div>
+
 <div class="container">
 	<div class="table">
 		<div class="table-header">
@@ -227,7 +237,18 @@ h16 {
                 {% endif %}
 
                 </div>
-				<div class="table-data">{{ userdata.meals_type }}</div>
+				<div class="table-data">
+                    {% if userdata.meals_type == 'combomeals' %}
+                        <input class="hidden" name="meals_type" value="{{ userdata.meals_type }}" readonly>
+                        COMBO MEAL
+                    {% elif userdata.meals_type == 'alacarte' %}
+                        <input class="hidden" name="meals_type" value="{{ userdata.meals_type }}" readonly>
+                        À LA CARTE
+                    {% elif userdata.meals_type == 'drinks' %}
+                        <input class="hidden" name="meals_type" value="{{ userdata.meals_type }}" readonly>
+                        DRINK
+                    {% endif %}
+                </div>
 				<div class="table-data"><input type="hidden" id="price" name="price" value="{{ userdata.price }}" readonly>
                     {{ userdata.price }}</div>
 				<div class="table-data"><input style="width:60px" type="number" id="alacarte_amount" name="alacarte_amount" value="{{ userdata.amount }}">
@@ -252,17 +273,6 @@ h16 {
 </div>
 Total Price: {{ totalprice }}
 
-
-    <form action="/menu">
-        <input class="custom-btn btn-11" type="submit" value="Add more" name="action">
-    </form>
-
-    </br>
-    <select name="order_type" id="o_type">
-        <option selected> ...</option>
-        <option value="delivery">Delivery</option>
-        <option value="pickup">Pickup</option>
-    </select>
 
 {% else %}
     <h1> There doesn't seem to be anything in here.</h1>

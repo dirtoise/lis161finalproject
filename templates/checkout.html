@@ -2,7 +2,238 @@
 
 {% block content %}
 
-YOUR ORDER IS NOW BEING PROCESSED...
+<style>
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700');
 
+$base-spacing-unit: 24px;
+$half-spacing-unit: $base-spacing-unit / 2;
+
+$color-alpha: #1772FF;
+$color-form-highlight: #EEEEEE;
+
+*, *:before, *:after {
+	box-sizing:border-box;
+}
+
+.custom-btn {
+  width: 70px;
+  height: 30px;
+  padding: 0px 0px;
+  border: 2px solid #ff928e;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.btn-11 {
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.btn-11:hover {
+  background: #ff928e;
+  color: #fff;
+}
+.btn-11:before {
+    position: absolute;
+    content: '';
+    display: inline-block;
+    top: -180px;
+    left: 0;
+    width: 30px;
+    height: 100%;
+    background-color: #fff;
+    animation: shiny-btn1 3s ease-in-out infinite;
+}
+.btn-11:active{
+  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.3),
+              -4px -4px 6px 0 rgba(116, 125, 136, .2),
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
+}
+
+@-webkit-keyframes shiny-btn1 {
+    0% { -webkit-transform: scale(0) rotate(45deg); opacity: 0; }
+    80% { -webkit-transform: scale(0) rotate(45deg); opacity: 0.5; }
+    81% { -webkit-transform: scale(4) rotate(45deg); opacity: 1; }
+    100% { -webkit-transform: scale(50) rotate(45deg); opacity: 0; }
+}
+
+.container {
+	max-width: 100%;
+	margin-right:auto;
+	margin-left:auto;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	min-height:;
+}
+
+.table {
+	width:100%;
+	border:1px solid $color-form-highlight;
+}
+
+.table-header {
+	display:flex;
+	height:50px;
+	width:100%;
+	background:#ff928e;
+	padding:($half-spacing-unit * 1.5) 0;
+}
+
+.table-row {
+	display:flex;
+	width:100%;
+	padding:($half-spacing-unit * 1.5) 0;
+
+	&:nth-of-type(odd) {
+		background:$color-form-highlight;
+	}
+}
+
+.table-data, .header__item {
+	flex: 1 1 20%;
+	text-align:center;
+}
+
+.header__item {
+	text-transform:uppercase;
+}
+
+h16 {
+	color:white;
+	text-decoration: none;
+	position:relative;
+	display:inline-block;
+	top: 30%;
+	padding-left:$base-spacing-unit;
+	padding-right:$base-spacing-unit;
+
+	&::after {
+		content:'';
+		position:absolute;
+		right:-($half-spacing-unit * 1.5);
+		color:white;
+		font-size:$half-spacing-unit;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	&.desc::after {
+		content: '(desc)';
+	}
+
+	&.asc::after {
+		content: '(asc)';
+	}
+
+}
+</style>
+<form action="{{ url_for('cart', loginuser=loginuser, usercart=usercart, cartchecker=cartchecker, totalprice=totalprice) }}">
+    <input class="custom-btn btn-11" type="submit" value="Return to Cart" name="action">
+</form>
+
+<form action="{{ url_for('finalizeprocessing') }}" method="POST">
+    <input class="custom-btn btn-11" type="submit" value="FINALIZE" name="action" for="">
+
+
+Total Price: ₱ <input class="hidden" name="totalprice" value="{{ totalprice }}" readonly>{{ totalprice }}
+<br>
+    <input type="radio" id="delivery" name="order_type" value="delivery">
+        <label for="delivery">DELIVERY</label><br>
+    <input type="radio" id="pickup" name="order_type" value="pickup">
+        <label for="pickup">PICKUP</label>
+<br>
+    <select name="order_location" id="o_location" required>
+        <option selected>... </option>
+        <option value="Vinzon's">Vinzon's</option>
+        <option value="Arki">Arki</option>
+        <option value="Math">Math</option>
+        <option value="Palma">Palma</option>
+        <option value="A2">A2</option>
+    </select>
+<br>
+    Payment Method:
+    <input name="payment_method" value="Cash on Delivery" readonly>
+</br>
+<br>
+    Payment Amount: ₱
+    <input type="number" min="{{ totalprice }}" name="payment_amount" value="0" required>
+</br>
+
+
+
+<div class="container">
+	<div class="table">
+		<div class="table-header">
+			<div class="header__item"><h16></h16></div>
+			<div class="header__item"><h16>Cart order</h16></div>
+			<div class="header__item"><h16></h16></div>
+			<div class="header__item"><h16>Meal type</h16></div>
+			<div class="header__item"><h16>Price</h16></div>
+			<div class="header__item"><h16>Amount</h16></div>
+            <div class="header__item"><h16>Total</h16></div>
+		</div>
+{% for userdata in usercart %}
+        <input class="hidden" name="user_id" value="{{ userdata.user_id }}" readonly>
+        <input class="hidden" name="username" value="{{ userdata.user }}" readonly>
+
+
+		<div class="table-content">
+			<br><div class="table-row">
+				<div class="table-data">
+                    <input class="hidden" id="cart_id" name="cart_id" value="{{ userdata.cart_id }}" readonly>
+                </div>
+				<div class="table-data">
+                    <input class="hidden" id="alacarte_type" name="alacarte_type" value="{{ userdata.alacarte_type }}" readonly>
+                    {{ userdata.alacarte_type|title }}
+                </div>
+                <div class="table-data">
+                {% if userdata.sauces_type == 'NULL' %}
+                    <input class="hidden" id="scs_type" name="alacarte_sauce" value="{{ userdata.sauces_type }}" readonly>
+                    <input class="hidden" name="alacarte_flavor" id="fl_type" style="width: 100px;" value="{{ userdata.flavors_type }}" readonly>
+                    {{ userdata.flavors_type|title }}
+                {% else %}
+                    {% if userdata.flavors_type == 'NULL' %}
+                    <input class="hidden" id="fl_type" name="alacarte_flavor" value="{{ userdata.flavors_type }}" readonly>
+                    <input class="hidden" name="alacarte_sauce" id="scs_type" style="width: 100px;" value="{{ userdata.sauces_type }}" readonly>
+                    {{ userdata.sauces_type|title }}
+                    {% endif %}
+                {% endif %}
+
+                </div>
+				<div class="table-data">
+                    {% if userdata.meals_type == 'combomeals' %}
+                        <input class="hidden" name="meals_type" value="{{ userdata.meals_type }}" readonly>
+                        COMBO MEAL
+                    {% elif userdata.meals_type == 'alacarte' %}
+                        <input class="hidden" name="meals_type" value="{{ userdata.meals_type }}" readonly>
+                        À LA CARTE
+                    {% elif userdata.meals_type == 'drinks' %}
+                        <input class="hidden" name="meals_type" value="{{ userdata.meals_type }}" readonly>
+                        DRINK
+                    {% endif %}
+                </div>
+				<div class="table-data"><input type="hidden" id="price" name="price" value="{{ userdata.price }}" readonly>
+                    {{ userdata.price }}</div>
+				<div class="table-data">
+                    <input class="hidden" style="width:60px" id="alacarte_amount" name="alacarte_amount" value="{{ userdata.amount }}" readonly>
+                    {{ userdata.amount }}
+                </div>
+                <div class="table-data">
+                    <input type="hidden" id="total_amount" name="total_amount" value="{{ userdata.total_amount }}" readonly>
+                    {{ userdata.total_amount }}
+                </div>
+			    </div>
+		</div>
+    {% endfor %}
+	</div>
+</div>
+
+</form>
 
 {% endblock %}

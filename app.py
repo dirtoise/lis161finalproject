@@ -166,9 +166,62 @@ def edit():
     return redirect(url_for('cart', cart_id=cart_id))
 
 
-
-@app.route('/cart/<int:user_id>/<users>/checkout/',)
+@app.route('/cart/<int:user_id>/<users>/checkout/', methods=['post'])
 def checkout(user_id,users):
+    loginuser = select_dict_user()
+    usercart = select_dict_cart()
+    totalprice = 0
+    for userdata in usercart:
+        totalprice += int(userdata['total_amount'])
+
+    if any(session) == False:
+        for users in loginuser:
+            users = users['username']
+    else:
+        if any(session) == True:
+            for users in loginuser:
+                users['username'] == session['user']
+                users = users['username']
+    return render_template('checkout.html', users=users,user_id=user_id,usercart=usercart,totalprice=totalprice)
+
+
+@app.route('/finalizeprocessing', methods=['POST'])
+def finalizeprocessing():
+    usercart = select_dict_cart()
+    finalcart = select_dict_finalcart()
+    change = 0
+    if int(request.form['payment_amount']) >= int(request.form['totalprice']):
+        change = int(request.form['payment_amount']) - int(request.form['totalprice'])
+    else:
+        return redirect(url_for('checkout', users=users,user_id=user_id,usercart=usercart,totalprice=totalprice))
+
+    if any(finalcart) == False:
+        finalcart_id = 0
+        finalcart_id += 1
+    else:
+        for data in finalcart:
+            finalcart_id = data['finalcart_id']
+            finalcart_id += 1
+
+    for userdata in usercart:
+        finalcart_data = {
+            'finalcart_id' : int(finalcart_id),
+            'order_type' : request.form['order_type'],
+            'order_location' : request.form['order_location'],
+            'cart_id' : userdata['cart_id'],
+            'user_id' : userdata['user_id'],
+            'user' : userdata['user'],
+            'total_price' : int(request.form['totalprice']),
+            'payment_amount' : int(request.form['payment_amount']),
+            'change' : int(change),
+            'payment_method' : request.form['payment_method']
+        }
+        insert_final_into_finalcart(finalcart_data)
+
+    return redirect(url_for('finalize', user_id=request.form['user_id'], users=request.form['username'], finalcart_id=finalcart_id))
+
+@app.route('/cart/<int:user_id>/<users>/<int:finalcart_id>/finalize')
+def finalize(user_id,users,finalcart_id):
     loginuser = select_dict_user()
 
     if any(session) == False:
@@ -179,8 +232,8 @@ def checkout(user_id,users):
             for users in loginuser:
                 users['username'] == session['user']
                 users = users['username']
-    return render_template('checkout.html', users=users,user_id=user_id)
 
+    return render_template('final.html', user_id=user_id, users=users, finalcart_id=finalcart_id)
 
 # Kiosk route to work on later
 """ 

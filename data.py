@@ -95,7 +95,9 @@ def read_cart_by_id(cart_id):
 
 def insert_alacarte_into_cart(cart_data):
     conn, cur = connect_db(db_path)
-    query = 'INSERT INTO cart (user_id, user, meals_type, alacarte_type, amount, price, flavors_type, sauces_type, total_amount) VALUES (?,?,?,?,?,?,?,?,?)'
+    query = 'INSERT INTO cart (user_id, user, meals_type, alacarte_type, ' \
+            'amount, price, flavors_type, sauces_type, total_amount) ' \
+            'VALUES (?,?,?,?,?,?,?,?,?)'
     values = (
               cart_data['user_id'],
               cart_data['user'],
@@ -131,3 +133,39 @@ def update_cart(cart_data):
     cur.execute(query,values)
     conn.commit()
     conn.close()
+
+def insert_final_into_finalcart(finalcart_data):
+    conn, cur = connect_db(db_path)
+    query = 'INSERT INTO finalcart (finalcart_id, order_type, order_location, cart_id, user_id, user, ' \
+            'total_price, payment_amount, change, payment_method) ' \
+            'VALUES (?,?,?,?,?,?,?,?,?,?)'
+    values = (
+            finalcart_data['finalcart_id'],
+            finalcart_data['order_type'],
+            finalcart_data['order_location'],
+            finalcart_data['cart_id'],
+            finalcart_data['user_id'],
+            finalcart_data['user'],
+            finalcart_data['total_price'],
+            finalcart_data['payment_amount'],
+            finalcart_data['change'],
+            finalcart_data['payment_method'],
+    )
+    cur.execute(query, values)
+    conn.commit()
+    conn.close()
+
+
+def read_finalcart_by_id(finalcart_id):
+    conn, cur = connect_db(db_path)
+    query = 'SELECT * FROM finalcart WHERE finalcart_id=?'
+    results = cur.execute(query, (finalcart_id,)).fetchone()
+    conn.close()
+    return results
+
+def select_dict_finalcart():
+    conn, cur = connect_db(db_path)
+    query = 'SELECT * FROM finalcart'
+    results = cur.execute(query, ()).fetchall()
+    conn.close()
+    return results
