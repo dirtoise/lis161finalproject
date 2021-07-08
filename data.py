@@ -11,13 +11,11 @@ def connect_db(path):
     conn.row_factory = sqlite3.Row
     return (conn, conn.cursor())
 
-def insert_user_into_user(session):
+def select_dict_user():
     conn, cur = connect_db(db_path)
-    query = 'INSERT INTO user (username) VALUES (?)'
-    values = (session['user'],)
-    cur.execute(query, values)
-    conn.commit()
-    conn.close()
+    query = 'SELECT * FROM user'
+    results = cur.execute(query,).fetchall()
+    return results
 
 def read_user_by_id(user_id):
     conn, cur = connect_db(db_path)
@@ -26,18 +24,33 @@ def read_user_by_id(user_id):
     conn.close()
     return results
 
+def insert_user_into_user(login_data):
+    conn, cur = connect_db(db_path)
+    query = 'INSERT INTO user (username,password) VALUES (?,?)'
+    values = (login_data['user'],
+              login_data['password'],)
+    cur.execute(query, values)
+    conn.commit()
+    conn.close()
+
+def update_user_in_cart(user_data):
+    conn, cur = connect_db(db_path)
+    query = 'UPDATE cart SET user_id=?, user=? WHERE cart_id=?'
+    values = (
+        user_data['user_id'],
+        user_data['user'],
+        user_data['cart_id'],
+    )
+    cur.execute(query,values)
+    conn.commit()
+    conn.close()
+
 def delete_user_from_user(username):
     conn, cur = connect_db(db_path)
     query = 'DELETE FROM user WHERE username=?'
     cur.execute(query, (username,))
     conn.commit()
     conn.close()
-
-def select_dict_user():
-    conn, cur = connect_db(db_path)
-    query = 'SELECT * FROM user'
-    results = cur.execute(query,).fetchall()
-    return results
 
 def select_dict_meals():
     conn, cur = connect_db(db_path)
@@ -62,6 +75,19 @@ def read_alacarte_by_id(alacarte_id):
     conn, cur = connect_db(db_path)
     query = 'SELECT * FROM alacarte WHERE alacarte_id=?'
     results = cur.execute(query, (alacarte_id,)).fetchone()
+    conn.close()
+    return results
+
+def select_dict_drinks_type():
+    conn, cur = connect_db(db_path)
+    query = 'SELECT * FROM drinks'
+    results = cur.execute(query,).fetchall()
+    return results
+
+def read_drinks_by_id(drinks_id):
+    conn, cur = connect_db(db_path)
+    query = 'SELECT * FROM drinks WHERE drinks_id=?'
+    results = cur.execute(query, (drinks_id,)).fetchone()
     conn.close()
     return results
 
@@ -96,13 +122,14 @@ def read_cart_by_id(cart_id):
 def insert_alacarte_into_cart(cart_data):
     conn, cur = connect_db(db_path)
     query = 'INSERT INTO cart (user_id, user, meals_type, alacarte_type, ' \
-            'amount, price, flavors_type, sauces_type, total_amount) ' \
-            'VALUES (?,?,?,?,?,?,?,?,?)'
+            'drinks_type, amount, price, flavors_type, sauces_type, total_amount) ' \
+            'VALUES (?,?,?,?,?,?,?,?,?,?)'
     values = (
               cart_data['user_id'],
               cart_data['user'],
               cart_data['meals_type'],
               cart_data['alacarte_type'],
+              cart_data['drinks_type'],
               cart_data['amount'],
               cart_data['price'],
               cart_data['flavors_type'],

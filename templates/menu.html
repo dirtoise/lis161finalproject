@@ -2,67 +2,29 @@
 
 {% block content %}
 <style>
-.btn-3 {
-  line-height: ;
-  padding: 20px 125px;
-}
-.btn-3:hover{
-  background: transparent;
-  color: #000;
-}
-.btn-3 span {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-.btn-3:before,
-.btn-3:after {
-  position: absolute;
-  content: "";
-  left: 0;
-  top: 0;
-  background: #000;
+
+.btn-11 {
+  overflow: hidden;
   transition: all 0.3s ease;
+  border: none;
+  padding: 0;
+  background: none;
 }
-.btn-3:before {
-  height: 0%;
-  width: 2px;
+.btn-11:hover {
+   background: #ff928e;
+  color: white;
 }
-.btn-3:after {
-  width: 0%;
-  height: 2px;
+
+
+.pnktext {
+  background-color: white;
+  color: #ff928e;
+  font-size: 15px;
+  font-family: 'Lato', sans-serif;
+
 }
-.btn-3:hover:before {
-  height: 100%;
-}
-.btn-3:hover:after {
-  width: 100%;
-}
-.btn-3 span:before,
-.btn-3 span:after {
-  position: absolute;
-  content: "";
-  right: 0;
-  bottom: 0;
-  background: #000;
-  transition: all 0.3s ease;
-}
-.btn-3 span:before {
-  width: 2px;
-  height: 0%;
-}
-.btn-3 span:after {
-  width: 0%;
-  height: 2px;
-}
-.btn-3 span:hover:before {
-  height: 100%;
-}
-.btn-3 span:hover:after {
-  width: 100%;
-}
-#name a {
+
+.name a {
   display: inline-block; /* add this line */
   height: 100%;
   width: 100%;
@@ -70,7 +32,7 @@
   margin-bottom: 5px;
 }
 
-#name a:hover {
+.name a:hover {
   height: 100%;
   width: 100%;
   margin: auto;
@@ -82,15 +44,24 @@
   -webkit-transition: .5s;
 }
 
-#name a {
-    border:solid 0px red;
-    background-color: orange;
+.name a {
     z-index: 999;
 }
+
+.btn-img {
+  border: none;
+  padding: 0;
+  background: none;
+}
+
+.w3-card-4,.w3-hover-shadow:hover{box-shadow:0 4px 10px 0 rgba(0,0,0,0.2),0 4px 10px 0 rgba(0,0,0,0.19)}
+.w3-container:after,.w3-container:before,.w3-panel:after,.w3-panel:before,.w3-row:after,.w3-row:before,.w3-row-padding:after,.w3-row-padding:before,
+.w3-left-align{text-align:left!important}.w3-right-align{text-align:right!important}.w3-justify{text-align:justify!important}.w3-center{text-align:center!important}
+
 </style>
+
 {% include 'menusidebar.html' %}
-<div class="col-sm-8">
-    <div class="row">
+
     {% if meals['meals_type'] == 'combomeals' %}
         <h1 style="text-indent:10px"><input class="hidden" value="{{ meals_type }}" readonly>COMBO MEALS</h1>
         <a href="/menu/{{ meals_type }}/"></a>
@@ -100,28 +71,46 @@
         </div>
         </div>
     {% elif meals['meals_type'] == 'alacarte' %}
-        <h1 style="text-indent:10px"><input class="hidden" value="{{ meals_type }}" readonly>A LA CARTE</h1>
-        {% for alacartemeals in alacartedict %}
+        <h2 style="text-indent:20px;font-family:'Lato';color:#ff928e;">
+            <input class="hidden" value="{{ meals_type }}" readonly>À LA CARTE</h2>
+        {% for alacartemeals in alacartesdict %}
+            <form action="{{ url_for('alacartes',meals_type='alacarte',alacarte_id=alacartemeals.alacarte_id,alacarte_type=alacartemeals.alacarte_type) }}">
             <div class="col-sm-3">
-            <div class="well" id="name">
-            <p><h4>{{ alacartemeals.alacarte_type }} </h4>
-            <form action="{{ url_for('alacartes',meals_type=meals_type,alacarte_id=alacartemeals.alacarte_id) }}">
-            <input class="btn-11" type="submit" value="Add to cart" name="{{ alacartemeals.alacarte_type }}"></p>
-            </form>
-            </div>
+                <div class="w3-container">
+                    <div class="w3-card-4" style="width:100%">
+                        <div class="w3-container pnktext">
+                        <button class="btn-11" type="submit" name="alacarte" style="width:100%;text-align:left;">
+                            <img src="{{ url_for('static', filename=alacartemeals.url) }}" style="width:100%;">
+                            <p><h5 style="margin-left:20px;">{{ alacartemeals.alacarte_type }}</h5>
+                        </button>
+                            </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         {% endfor %}
-    {% else %}
-        <h1 style="text-indent:10px"><input class="hidden" value="{{ meals_type }}" readonly>DRINKS</h1>
-        <a href="/menu/{{ meals['meals_type'] }}/"></a>
-        <div class="col-sm-3">
-        <div class="well">
-        <p><h4>
-        <input class="btn-11" type="submit" value="{{ meals['meals_type'] }}" name="action"></p></h4>
-        </div>
-        </div>
+    {% elif meals['meals_type'] == 'drinks' %}
+        <h2 style="text-indent:20px;font-family:'Lato';color:#ff928e;">
+            <input class="hidden" value="{{ meals_type }}" readonly>DRINKS</h1>
+        {% for drinks in drinksdict %}
+        <form action="{{ url_for('drinks',meals_type='drinks',drinks_id=drinks.drinks_id,drinks_type=drinks.drinks_type) }}">
+            <div class="col-sm-3">
+                <div class="w3-container">
+                    <div class="w3-card-4" style="width:100%">
+                        <div class="w3-container w3-left-align pnktext">
+                        <button class="btn-11" type="submit" name="drinks" style="width:100%;text-align:left;">
+                            <img src="{{ url_for('static', filename=drinks.url) }}" style="width:100%">
+                            <p><h5 style="margin-left:20px;">{{ drinks.drinks_type }}</h5>
+                        </button>
+                        </p>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     {% endif %}
     </div>
 </div>
-
 {% endblock %}

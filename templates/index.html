@@ -18,6 +18,12 @@
     }
 }
 
+.btn-img {
+  border: none;
+  padding: 0;
+  background: none;
+}
+
 .custom-btn {
   width: 130px;
   height: 40px;
@@ -157,21 +163,33 @@ figure:hover+span {
   <div class="row">
       <div class="col-sm-4">
         <div class="grayhover">
+            <form action="/menu/combomeals">
+            <button class="btn-img" style="width:100%">
         <figure><img src="static/img/index1.png" /></figure>
+            </button>
+            </form>
             <div class="text">SULIT COMBO MEALS</div>
         </div>
       </div>
 
       <div class="col-sm-4">
         <div class="grayhover">
-        <figure><img src="static/img/index2.png" /></figure>
+            <form action="/menu/alacarte">
+            <button class="btn-img" style="width:100%">
+        <figure><img src="static/img/index2.png"></figure>
+            </button>
+            </form>
             <div class="text">TASTY A LA CARTE</div>
         </div>
       </div>
 
       <div class="col-sm-4">
         <div class="grayhover">
-        <figure><img src="static/img/index3.png" /></figure>
+            <form action="/menu/drinks">
+            <button class="btn-img" style="width:100%">
+        <figure><img src="static/img/index3.png"></figure>
+            </button>
+            </form>
             <div class="text">REFRESHING BEVERAGES</div>
         </div>
       </div>

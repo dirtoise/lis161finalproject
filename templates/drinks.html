@@ -39,11 +39,10 @@ display: inline-block;
   text-align: center;
 }
 </style>
-
 {% include 'menusidebar.html' %}
 <div class="grid-container">
   <div class="grid-item">
-    <form action="/menu/alacarte">
+    <form action="/menu/drinks">
     <input class="custom-btn btn-11" type="submit" value="Go back" name="action" style="margin-right:80%;">
     </form>
   </div>
@@ -56,52 +55,38 @@ display: inline-block;
   <div class="grid-item">
     <input class="hidden" id="username" name="username" value="{{ username }}" readonly>
     <input class="hidden" id="user_id" name="user_id" value="{{ user_id }}" readonly>
-    <input class="hidden" id="drinks_type" name="drinks_type" value="NULL" readonly>
-  </div>
-  <div class="grid-item"></div>
-  <div class="grid-item"></div>
-  <div class="grid-item">
-  </div>
-  <div class="grid-item">
-      <img src="{{ url_for('static', filename=alacarteid.url) }}" style="width:100%;border: 2px solid #ff928e;">
-  </div>
-  <div class="grid-item"></div>
-  <div class="grid-item">
-       {% if alacarteid.alacarte_type == 'Pancit Canton' %}
-    <p>
-    Flavor: <br><select name="alacarte_flavor" id="fl_type" required>
-        {% for flavors in flavordict %}
-            <option value="{{ flavors.flavors_type }}" name="alacarte_flavor">
-                {{ flavors.flavors_type|title }}
-            </option>
-        {% endfor %}
-        </select>
+    <input class="hidden" id="alacarte_type" name="alacarte_type" value="NULL" readonly>
     <input class="hidden" id="alacarte_sauce" name="alacarte_sauce" value=NULL readonly>
-    {% else %}
-    Sauce: <select name="alacarte_sauce" id="scs_type" required>
-        {% for sauces in saucedict %}
-            <option value="{{ sauces.sauces_type }}" name="alacarte_sauce">
-                {{ sauces.sauces_type|title }}
-            </option>
-        {% endfor %}
-        </select>
     <input class="hidden" id="alacarte_flavor" name="alacarte_flavor" value=NULL readonly>
-    {% endif %}
+      {% for meal in meals %}
+        {% if meal['meals_type'] == 'drinks' %}
+            <input class="hidden" name="meals_type" value="{{ meal['meals_type'] }}" readonly>
+        {% endif %}
+    {% endfor %}
+  </div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item">
+  </div>
+  <div class="grid-item">
+      <img src="{{ url_for('static', filename=drinksid.url) }}" style="width:100%;border: 2px solid #ff928e;">
+  </div>
+  <div class="grid-item"></div>
+  <div class="grid-item">
   </div>
   <div class="grid-item">
       <p style="margin-top:50px;">
-       <label type=""> Order amount: </label>
-        <div class="number">
-            <span class="minus">-</span>
-                <input type="number" min="1" value="{{ alacarteid.amount }}" name="amount" required>
-            <span class="plus">+</span>
+        <label type=""> Order amount: </label>
+            <div class="number">
+                <span class="minus">-</span>
+                    <input type="number" min="1" value="{{ drinksid.amount }}" name="amount" required>
+                <span class="plus">+</span>
+            </div>
       </p>
-        </div>
   </div>
   <div class="grid-item">
-    <h1> <label for="alacarte_type"> {{ alacarteid.alacarte_type|title }} </label> </h1>
-    <input class="hidden" id="alacarte_type" name="alacarte_type" value="{{ alacarteid.alacarte_type }}" readonly>
-
+    <h1> <label for="drinks_type"> {{ drinksid.drinks_type|title }} </label> </h1>
+    <input class="hidden" id="drinks_type" name="drinks_type" value="{{ drinksid.drinks_type }}" readonly>
   </div>
   <div class="grid-item">
   </div>
@@ -115,12 +100,11 @@ display: inline-block;
 
   <div class="grid-item">
             <p style="margin-top:50px;">
-    <label for="alacarte_price"> ₱{{ alacarteid.price }} </label>
-    <input class="hidden" id="alacarte_price" name="price" value="{{ alacarteid.price }}" readonly>
+    <label for="drinks_price"> Price:  {{ drinksid.price }} </label>
+    <input class="hidden" id="drinks_price" name="price" value="{{ drinksid.price }}" readonly>
             </p>
   </div>
 </div>
-
 </form>
 
 {% endblock %}

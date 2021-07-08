@@ -15,26 +15,29 @@
   align-items: center;
   height: 250px;
 }
-
 </style>
 <div class="w3-container w3-panel ">
         <div class="w3-container w3-center" style="padding:70px;">
-<form action="{{ url_for('loginprocessing') }}" method="post">
-    <br>
-        <img src="static/img/logo1.png" style="width:10%">
-    <h5>THE UP E-KIOSK</h5>
-    <h3> SIGN-IN</h3>
+            <br>
+                <img src="static/img/logo1.png" style="width:10%">
+                <h5>Sign up for the E-Kiosk</h5>
+                <h3>Create an account</h3>
 
-    <p><input type="text" name="name" placeholder="Username" style="width:100% align:left"></p>
+
+    <form action="{{ url_for('registerprocessing') }}" method="post">
+    <p><input type="text" name="name" placeholder="Username"></p>
     <p><input type="text" name="password" placeholder="Password"></p>
-    <div class="w3-section">
-        <br>
-    <input type="submit" value="LOG-IN">
-    <br>
-       No account?<a href="{{ url_for('register') }}">Create one here.</a>
+    <p><input type="text" name="confirmpassword" placeholder="Confirm Password"></p>
+<br>
+    <p><input type="submit" value="REGISTER"></p>
+
 </form>
+        Already have an account?<a href="{{ url_for('login') }}">Sign-in here.</a>
+
     </div>
     </div>
+
     </div>
+
 
 {% endblock %}

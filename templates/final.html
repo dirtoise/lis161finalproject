@@ -5,5 +5,31 @@
 YOUR ORDER IS NOW BEING PROCESSED. THANK YOU FOR PURCHASING!
 
 ETA ~15 MINS.
+<br> <h3>RECEIPT</h3>
+Customer: {{ finalcartid.user }}
+<br>
+Location: {{ finalcartid.order_location }}
+<br>
+Order type: {{ finalcartid.order_type|title }}
+<br><div class="">
+<div class="">
+Items ordered:
+    {% for items in usercart %}
+        {% if items['user_id'] in finalcartid %}
+            {% if items['alacarte_type'] == 'NULL' %}
+                <br>{{ items['amount'] }} {{ items['drinks_type'] }} ₱{{ items['price'] }} ₱{{ items['total_amount'] }}
+            {% elif items['drinks_type'] == 'NULL' %}
+                <br>{{ items['amount'] }} {{ items['alacarte_type'] }} ₱{{ items['price'] }} ₱{{ items['total_amount'] }}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</div>
+    </div>
+<br>
+    Total: ₱ {{ finalcartid.total_price }}
+<br>
+{{ finalcartid.payment_method }} ₱ {{ finalcartid.payment_amount }}
+<br>
+Change: ₱ {{ finalcartid.change }}
 
 {% endblock %}

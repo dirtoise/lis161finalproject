@@ -1,7 +1,14 @@
 <style>
 .navbar {
   margin-bottom: 0;
-  border-radius: 0;
+  border-radius: 2px;
+  border-top:0px;
+  border-left:0px;
+  border-right:0px;
+  border-bottom:2px;
+
+  border-style:solid;
+  border-color:#ff928e;
 }
 
 .navcustom {
@@ -9,23 +16,28 @@
 }
 a:visited, a:link {
   color: #ff928e;
-  padding: 15px 25px;
+  padding: 15px 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
+
+.navbutton {
+  margin-bottom: 0;
+  border-radius: 0;
+  border-top:0px;
+  border-left:2px;
+  border-right:2px;
+
+}
+
 }
 
 </style>
-<nav class="navbar" style="background-color: white">
+<nav class="navbar" style="background-color: white;">
   <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
       <a class="navbar-brand" href="{{ url_for('index') }}">
-        <img src="static/img/logo.png" width="35" height="35" method="POST"></a>
+        <img src="{{ url_for('static', filename='img/logo2.png') }}" width="35" height="35" method="POST"></a>
                 <a class="navbar-brand navcustom" href="{{ url_for('index') }}"> UP E-Kiosk</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
@@ -38,8 +50,10 @@ a:visited, a:link {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         {% if 'user' in session %}
+          <li><a href="{{ url_for('profile') }}"><span class="glyphicon"></span> Profile </a></li>
           <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         {% else %}
+          <li><a href="{{ url_for('register') }}"><span class="glyphicon"></span> Register</a></li>
           <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         {% endif %}
 

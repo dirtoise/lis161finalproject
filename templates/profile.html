@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{{ username }}
+
+
+<form action="{{ url_for('profile', loginuser=loginuser,username=username,user_id=user_id,finalcart=finalcart,fuser_id=fuser_id,deleteuser=deleteuser) }}">
+    <input class="" name="Delete" type="submit" value="Delete Account">
+</form>
+
+{% endblock %}

@@ -132,6 +132,19 @@ h16 {
 	}
 
 }
+
+.w3-container,.w3-panel{padding:0.01em 16px}.w3-panel{margin-top:16px;margin-bottom:16px}
+.w3-card-4,.w3-hover-shadow:hover{box-shadow:0 4px 10px 0 rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19)}
+.w3-dark-grey,.w3-hover-dark-grey:hover,.w3-dark-gray,.w3-hover-dark-gray:hover{color:#ff928e!important;background-color:white!important;border:10px;}
+.w3-left-align{text-align:left!important}.w3-right-align{text-align:right!important}.w3-justify{text-align:justify!important}.w3-center{text-align:center!important}
+.w3-bar-block.w3-center .w3-bar-item{text-align:center}.w3-block{display:block;width:100%}
+.w3-section,.w3-code{margin-top:16px!important;margin-bottom:16px!important}
+.w3-border{  border: 2px solid #ff928e;}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
 </style>
 
 
@@ -141,12 +154,9 @@ h16 {
 <form action="/menu">
     <input class="custom-btn btn-11" type="submit" value="Add more" name="action">
 </form>
-
-{% for users in loginuser %}
-    <form action="{{ url_for('checkout', user_id= users.user_id, users= users.username) }}" method="post">
-        <input class="custom-btn btn-11" type="submit" name="CHECK OUT" value="CHECK OUT"></button>
+    <form action="{{ url_for('checkout', user_id=user_id, users=username) }}" method="post">
+        <input class="custom-btn btn-11" type="submit" name="CHECK OUT" value="CHECK OUT">
     </form>
-{% endfor %}
 </div>
 
 <div class="container">
@@ -169,7 +179,11 @@ h16 {
 			<br><div class="table-row">
 				<div class="table-data"><input class="hidden" id="cart_id" name="cart_id" value="{{ userdata.cart_id }}" readonly>
                 </div>
+                {% if userdata.alacarte_type == 'NULL' %}
+				<div class="table-data">{{ userdata.drinks_type|title }}</div>
+                {% elif userdata.drinks_type == 'NULL' %}
 				<div class="table-data">{{ userdata.alacarte_type|title }}</div>
+                {% endif %}
                 <div class="table-data">
                 {% if userdata.sauces_type == 'NULL' %}
                     <input class="hidden" id="scs_type" name="alacarte_sauce" value="{{ userdata.sauces_type }}" readonly>
@@ -275,8 +289,13 @@ Total Price: {{ totalprice }}
 
 
 {% else %}
-    <h1> There doesn't seem to be anything in here.</h1>
 
+<div class="w3-container w3-panel ">
+        <div class="w3-container w3-center" style="padding:220px;">
+    <h3> Your cart seems to be empty. Order meals
+        <a href="{{ url_for('basemenu') }}" style="padding:0px 0px;">here.</a></h3>
+        </div>
+</div>
 {% endif %}
 
 

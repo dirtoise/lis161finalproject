@@ -8,29 +8,75 @@ app.secret_key = '123'
 def index():
     return render_template('index.html')
 
-@app.route('/login', methods=['POST', 'GET'])
+@app.route('/login',)
 def login():
-    cart = select_dict_cart()
+    return render_template('login.html',)
 
-    if request.method == 'POST':
-        user = request.form['name']
-        session['user'] = user
-        session_data = {
-            'user' :request.form['name'],
-        }
-        if any(cart) == True:
-            for ids in cart:
-                ids['cart_id']
-                cart_id = ids['cart_id']
-                delete_cart_from_cart(cart_id)
-            insert_user_into_user(session_data)
-        else:
-            insert_user_into_user(session_data)
-        return redirect(url_for('user'))
+@app.route('/loginprocessing', methods=['POST', 'GET'])
+def loginprocessing():
+    usercart = select_dict_cart()
+    loginuser = select_dict_user()
+
+    for users in loginuser:
+        if request.form['name'] in users['username']:
+            if request.form['name'] == users['username'] and request.form['password'] == users['password']:
+                user = request.form['name']
+                session['user'] = user
+                if user in users:
+                    users['user_id']
+                    user_id = users['user_id']
+                    if any(usercart) == True:
+                        for ids in usercart:
+
+                            user_data = {
+                                'user_id': user_id,
+                                'user': user,
+                                'cart_id': ids['cart_id'],
+                            }
+
+                            update_user_in_cart(user_data)
+                        return redirect(url_for('user'))
+                    else:
+                        return redirect(url_for('user'))
     else:
-        if 'user' in session:
-            return redirect(url_for('user',))
-        return render_template('login.html')
+        return redirect(url_for('login', ))
+
+
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
+@app.route('/registerprocessing', methods=['POST'])
+def registerprocessing():
+    loginuser = select_dict_user()
+    usercart = select_dict_cart()
+
+    login_data = {
+        'user' : request.form['name'],
+        'password' : request.form['password'],
+    }
+    if request.form['password'] == request.form['confirmpassword']:
+        if 'user' not in loginuser:
+            user = request.form['name']
+            session['user'] = user
+            if any(usercart) == True:
+                for ids in usercart:
+                    ids['cart_id']
+                    cart_id = ids['cart_id']
+                user_data = {
+                    'user' : request.form['name'],
+                    'password' : request.form['password'],
+                    'cart_id' : cart_id,
+                }
+                insert_user_into_user(login_data)
+                update_user_in_cart(user_data)
+            elif any(cart) == False:
+                insert_user_into_user(login_data)
+            return redirect(url_for('user'))
+        else:
+            return redirect(url_for('login'))
+    else:
+        return redirect(url_for('register'))
 
 @app.route('/user')
 def user():
@@ -44,24 +90,24 @@ def user():
 def logout():
     loginuser = select_dict_user()
     cart = select_dict_cart()
-    # deletes username in user database on logout #
-    for users in loginuser:
-        if users['username'] == session['user']:
-            users['user_id']
-            username = session['user']
-            delete_user_from_user(username)
-
-    # deletes cart in database and username in session on logout #
-    if any(cart) == True:
-        for ids in cart:
-            ids['cart_id']
-            cart_id = ids['cart_id']
-            delete_cart_from_cart(cart_id)
-        session.pop('user', None)
-    else:
-        session.pop('user', None)
+    session.pop('user', None)
 
     return redirect(url_for('login'))
+
+@app.route('/profile')
+def profile():
+    loginuser = select_dict_user()
+    finalcart = select_dict_finalcart()
+    for users in loginuser:
+        if users['username'] == session['user']:
+            users['username']
+            username = users['username']
+            user_id = users['user_id']
+            for finalusers in finalcart:
+                if finalusers['user'] == username:
+                    finalusers['user_id']
+                    fuser_id = finalusers['user_id']
+    return render_template('profile.html',loginuser=loginuser,username=username,user_id=user_id,finalcart=finalcart,fuser_id=fuser_id,)
 
 @app.route('/menu')
 def basemenu():
@@ -70,30 +116,52 @@ def basemenu():
 @app.route('/menu/<meals_type>/')
 def menu(meals_type):
     meals = read_meals_by_type(meals_type,)
-    alacartedict = select_dict_alacarte_type()
-    return render_template('menu.html',meals_type=meals_type,meals=meals,alacartedict=alacartedict)
+    alacartesdict = select_dict_alacarte_type()
+    drinksdict = select_dict_drinks_type()
+    return render_template('menu.html',meals_type=meals_type,meals=meals,alacartesdict=alacartesdict,drinksdict=drinksdict)
 
-@app.route('/menu/<meals_type>/<int:alacarte_id>')
-def alacartes(meals_type, alacarte_id):
-    alacarteid = read_alacarte_by_id(alacarte_id)
-    meals = read_meals_by_type(meals_type)
-    flavordict = select_dict_flavors()
-    saucedict = select_dict_sauces()
-    userdict = select_dict_user()
+@app.route('/menu/drinks/<int:drinks_id>/<drinks_type>/')
+def drinks(drinks_id,drinks_type):
+    drinksid = read_drinks_by_id(drinks_id)
+    meals = select_dict_meals()
+    loginuser = select_dict_user()
 
-    for users in userdict:
-        if any(session) == False:
+    for users in loginuser:
+        if 'user' not in session:
+            if 'guest' in users['username']:
+                username = users['username']
+                user_id = users['user_id']
+        elif 'user' in session:
+            if users['username'] == session['user']:
                 users['username']
                 username = users['username']
                 user_id = users['user_id']
-        else:
-            if any(session) == True:
-                if users['username'] == session['user']:
-                    users['username']
-                    username = users['username']
-                    user_id = users['user_id']
 
-    return render_template('alacartemeals.html',alacarte_id=alacarte_id, alacarteid=alacarteid,flavordict=flavordict,saucedict=saucedict,meals=meals,userdict=userdict,meals_type=meals_type,username=username,user_id=user_id)
+    return render_template('drinks.html',drinks_id=drinks_id,drinks_type=drinks_type, drinksid=drinksid,
+                           meals=meals,loginuser=loginuser,username=username,user_id=user_id)
+
+@app.route('/menu/alacarte/<int:alacarte_id>/<alacarte_type>/')
+def alacartes(alacarte_id, alacarte_type):
+    alacarteid = read_alacarte_by_id(alacarte_id)
+    meals = select_dict_meals()
+    flavordict = select_dict_flavors()
+    saucedict = select_dict_sauces()
+    loginuser = select_dict_user()
+
+    for users in loginuser:
+        if 'user' not in session:
+            if 'guest' in users['username']:
+                username = users['username']
+                user_id = users['user_id']
+        elif 'user' in session:
+            if users['username'] == session['user']:
+                users['username']
+                username = users['username']
+                user_id = users['user_id']
+
+    return render_template('alacartemeals.html',alacarte_id=alacarte_id, alacarteid=alacarteid,
+                           alacarte_type=alacarte_type,flavordict=flavordict,saucedict=saucedict,
+                           meals=meals,loginuser=loginuser,username=username,user_id=user_id)
 
 @app.route('/order')
 def baseorder():
@@ -102,15 +170,16 @@ def baseorder():
 @app.route('/mealprocessing/', methods=['POST'])
 def mealprocessing():
 
-    totalamount = int(request.form['alacarte_amount']) * int(request.form['alacarte_price'])
+    totalamount = int(request.form['amount']) * int(request.form['price'])
 
     cart_data = {
         'user_id': request.form['user_id'],
         'user' : request.form['username'],
         'meals_type' : request.form['meals_type'],
         'alacarte_type' : request.form['alacarte_type'],
-        'amount': int(request.form['alacarte_amount']),
-        'price': int(request.form['alacarte_price']),
+        'drinks_type' : request.form['drinks_type'],
+        'amount': int(request.form['amount']),
+        'price': int(request.form['price']),
         'flavors_type' : request.form['alacarte_flavor'],
         'sauces_type' : request.form['alacarte_sauce'],
         'total_amount': int(totalamount),
@@ -129,9 +198,21 @@ def cart():
     for userdata in usercart:
         totalprice += int(userdata['total_amount'])
 
+    for users in loginuser:
+        if 'user' not in session:
+            if 'guest' in users['username']:
+                username = users['username']
+                user_id = users['user_id']
+        elif 'user' in session:
+            if users['username'] == session['user']:
+                users['username']
+                username = users['username']
+                user_id = users['user_id']
+
+
     cartchecker = any(usercart)
 
-    return render_template('cart.html', loginuser=loginuser, usercart=usercart, cartchecker=cartchecker, totalprice=totalprice)
+    return render_template('cart.html', loginuser=loginuser, usercart=usercart, cartchecker=cartchecker, totalprice=totalprice,username=username,user_id=user_id)
 
 @app.route('/cart/delete/<int:cart_id>', methods=['POST'])
 def delete(cart_id):
@@ -223,17 +304,21 @@ def finalizeprocessing():
 @app.route('/cart/<int:user_id>/<users>/<int:finalcart_id>/finalize')
 def finalize(user_id,users,finalcart_id):
     loginuser = select_dict_user()
+    finalcartid = read_finalcart_by_id(finalcart_id)
+    finalcart = select_dict_finalcart()
+    usercart = select_dict_cart()
 
-    if any(session) == False:
+    if 'user' not in session:
         for users in loginuser:
             users = users['username']
     else:
-        if any(session) == True:
+        if 'user' in session:
             for users in loginuser:
                 users['username'] == session['user']
                 users = users['username']
 
-    return render_template('final.html', user_id=user_id, users=users, finalcart_id=finalcart_id)
+    return render_template('final.html', user_id=user_id, users=users, finalcart_id=finalcart_id,
+                           finalcartid=finalcartid, finalcart=finalcart, usercart=usercart)
 
 # Kiosk route to work on later
 """ 
