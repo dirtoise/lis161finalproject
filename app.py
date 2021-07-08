@@ -65,7 +65,7 @@ def registerprocessing():
                     cart_id = ids['cart_id']
                 user_data = {
                     'user' : request.form['name'],
-                    'password' : request.form['password'],
+                    'user_id' : ids['user_id'],
                     'cart_id' : cart_id,
                 }
                 insert_user_into_user(login_data)
