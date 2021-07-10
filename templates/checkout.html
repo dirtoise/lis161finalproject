@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<style>
+<style xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700');
 
 $base-spacing-unit: 24px;
@@ -132,51 +132,61 @@ h16 {
 	}
 
 }
+
+.w3-container,.w3-panel{padding:0.01em 16px}.w3-panel{margin-top:16px;margin-bottom:16px}
+.w3-card-4,.w3-hover-shadow:hover{box-shadow:0 4px 10px 0 rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19)}
+.w3-dark-grey,.w3-hover-dark-grey:hover,.w3-dark-gray,.w3-hover-dark-gray:hover{color:#ff928e!important;background-color:white!important;border:10px;}
+.w3-left-align{text-align:left!important}.w3-right-align{text-align:right!important}.w3-justify{text-align:justify!important}.w3-center{text-align:center!important}
+.w3-bar-block.w3-center .w3-bar-item{text-align:center}.w3-block{display:block;width:100%}
+.w3-section,.w3-code{margin-top:16px!important;margin-bottom:16px!important}
+.w3-border{  border: 2px solid #ff928e;}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  background-color: #ff928e;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: 50%;
+  border: 0px solid #ff928e;
+  border-radius: 0px;
+  margin-right: 2rem;
+  color:white;
+  padding: 1rem;
+  outline: none;
+  padding-right: 2rem;
+  active-color:white;
+  font-family: 'Lato';
+}
+select option {
+    color: #ff928e;
+    background-color: white;
+
+}
 </style>
-<form action="{{ url_for('cart', loginuser=loginuser, usercart=usercart, cartchecker=cartchecker, totalprice=totalprice) }}">
-    <input class="custom-btn btn-11" type="submit" value="Return to Cart" name="action">
-</form>
+
 
 <form action="{{ url_for('finalizeprocessing') }}" method="POST">
-    <input class="custom-btn btn-11" type="submit" value="FINALIZE" name="action" for="">
 
-
-Total Price: ₱ <input class="hidden" name="totalprice" value="{{ totalprice }}" readonly>{{ totalprice }}
-<br>
-    <input type="radio" id="delivery" name="order_type" value="delivery">
-        <label for="delivery">DELIVERY</label><br>
-    <input type="radio" id="pickup" name="order_type" value="pickup">
-        <label for="pickup">PICKUP</label>
-<br>
-    <select name="order_location" id="o_location" required>
-        <option selected>... </option>
-        <option value="Vinzon's">Vinzon's</option>
-        <option value="Arki">Arki</option>
-        <option value="Math">Math</option>
-        <option value="Palma">Palma</option>
-        <option value="A2">A2</option>
-    </select>
-<br>
-    Payment Method:
-    <input name="payment_method" value="Cash on Delivery" readonly>
-</br>
-<br>
-    Payment Amount: ₱
-    <input type="number" min="{{ totalprice }}" name="payment_amount" value="0" required>
-</br>
-
-
-
-<div class="container">
+<div class="container1">
 	<div class="table">
 		<div class="table-header">
 			<div class="header__item"><h16></h16></div>
-			<div class="header__item"><h16>Cart order</h16></div>
-			<div class="header__item"><h16></h16></div>
-			<div class="header__item"><h16>Meal type</h16></div>
-			<div class="header__item"><h16>Price</h16></div>
-			<div class="header__item"><h16>Amount</h16></div>
-            <div class="header__item"><h16>Total</h16></div>
+			<div class="header__item"><h16>AMOUNT</h16></div>
+			<div class="header__item"><h16>CART ORDER</h16></div>
+            <div class="header__item"><h16></h16></div>
+			<div class="header__item"><h16>MEAL TYPE</h16></div>
+			<div class="header__item"><h16>PRICE</h16></div>
+			<div class="header__item"><h16>TOTAL</h16></div>
+            <div class="header__item"><h16></h16></div>
 		</div>
 {% for userdata in usercart %}
         <input class="hidden" name="user_id" value="{{ userdata.user_id }}" readonly>
@@ -184,56 +194,139 @@ Total Price: ₱ <input class="hidden" name="totalprice" value="{{ totalprice }}
 
 
 		<div class="table-content">
-			<br><div class="table-row">
-				<div class="table-data">
-                    <input class="hidden" id="cart_id" name="cart_id" value="{{ userdata.cart_id }}" readonly>
-                </div>
-				<div class="table-data">
-                    <input class="hidden" id="alacarte_type" name="alacarte_type" value="{{ userdata.alacarte_type }}" readonly>
-                    {{ userdata.alacarte_type|title }}
-                </div>
-                <div class="table-data">
-                {% if userdata.sauces_type == 'NULL' %}
-                    <input class="hidden" id="scs_type" name="alacarte_sauce" value="{{ userdata.sauces_type }}" readonly>
-                    <input class="hidden" name="alacarte_flavor" id="fl_type" style="width: 100px;" value="{{ userdata.flavors_type }}" readonly>
-                    {{ userdata.flavors_type|title }}
-                {% else %}
-                    {% if userdata.flavors_type == 'NULL' %}
-                    <input class="hidden" id="fl_type" name="alacarte_flavor" value="{{ userdata.flavors_type }}" readonly>
-                    <input class="hidden" name="alacarte_sauce" id="scs_type" style="width: 100px;" value="{{ userdata.sauces_type }}" readonly>
-                    {{ userdata.sauces_type|title }}
+            <br>
+                <div class="table-row" style="border-bottom: 2px solid #eee;">
+                    <div class="table-data">
+                        <input class="hidden" id="cart_id" name="cart_id" value="{{ userdata.cart_id }}" readonly>
+                    </div>
+                    <div class="table-data">
+                        <input class="hidden" style="width:60px" id="alacarte_amount" name="alacarte_amount" value="{{ userdata.amount }}" readonly>
+                        {{ userdata.amount }}
+                    </div>
+                    <div class="table-data">
+                        <input class="hidden" id="alacarte_type" name="alacarte_type" value="{{ userdata.alacarte_type }}" readonly>
+                        {{ userdata.alacarte_type|title }}
+                    </div>
+                    <div class="table-data">
+                    {% if userdata.sauces_type == 'NULL' %}
+                        <input class="hidden" id="scs_type" name="alacarte_sauce" value="{{ userdata.sauces_type }}" readonly>
+                        <input class="hidden" name="alacarte_flavor" id="fl_type" style="width: 100px;" value="{{ userdata.flavors_type }}" readonly>
+                        {{ userdata.flavors_type|title }}
+                    {% else %}
+                        {% if userdata.flavors_type == 'NULL' %}
+                        <input class="hidden" id="fl_type" name="alacarte_flavor" value="{{ userdata.flavors_type }}" readonly>
+                        <input class="hidden" name="alacarte_sauce" id="scs_type" style="width: 100px;" value="{{ userdata.sauces_type }}" readonly>
+                        {{ userdata.sauces_type|title }}
+                        {% endif %}
                     {% endif %}
-                {% endif %}
-
+                    </div>
+                    <div class="table-data">
+                         {% if userdata.meals_type == 'combomeals' %}
+                            <input class="hidden" name="meals_type" value="{{ userdata.meals_type }}" readonly>
+                            COMBO MEAL
+                        {% elif userdata.meals_type == 'alacarte' %}
+                            <input class="hidden" name="meals_type" value="{{ userdata.meals_type }}" readonly>
+                            À LA CARTE
+                        {% elif userdata.meals_type == 'drinks' %}
+                            <input class="hidden" name="meals_type" value="{{ userdata.meals_type }}" readonly>
+                            DRINK
+                        {% endif %}
+                    </div>
+                    <div class="table-data">
+                        <input type="hidden" id="price" name="price" value="{{ userdata.price }}" readonly>
+                        ₱{{ userdata.price }}
+                    </div>
+                    <div class="table-data">
+                        <input type="hidden" id="total_amount" name="total_amount" value="{{ userdata.total_amount }}" readonly>
+                        ₱{{ userdata.total_amount }}
+                    </div>
+                    <div class="table-data"></div>
                 </div>
-				<div class="table-data">
-                    {% if userdata.meals_type == 'combomeals' %}
-                        <input class="hidden" name="meals_type" value="{{ userdata.meals_type }}" readonly>
-                        COMBO MEAL
-                    {% elif userdata.meals_type == 'alacarte' %}
-                        <input class="hidden" name="meals_type" value="{{ userdata.meals_type }}" readonly>
-                        À LA CARTE
-                    {% elif userdata.meals_type == 'drinks' %}
-                        <input class="hidden" name="meals_type" value="{{ userdata.meals_type }}" readonly>
-                        DRINK
-                    {% endif %}
-                </div>
-				<div class="table-data"><input type="hidden" id="price" name="price" value="{{ userdata.price }}" readonly>
-                    {{ userdata.price }}</div>
-				<div class="table-data">
-                    <input class="hidden" style="width:60px" id="alacarte_amount" name="alacarte_amount" value="{{ userdata.amount }}" readonly>
-                    {{ userdata.amount }}
-                </div>
+        </div>
+    {% endfor %}<br>
+            <div class="table-row" style="border-bottom: 2px solid #eee;">
+                <div class="table-data"></div>
+                <div class="table-data"></div>
+                <div class="table-data"></div>
+                <div class="table-data"></div>
+                <div class="table-data"></div>
+                <div class="table-data">Total Price:</div>
                 <div class="table-data">
-                    <input type="hidden" id="total_amount" name="total_amount" value="{{ userdata.total_amount }}" readonly>
-                    {{ userdata.total_amount }}
+                     ₱{{ totalprice }}<input class="hidden" name="totalprice" value="{{ totalprice }}" readonly>
                 </div>
-			    </div>
-		</div>
-    {% endfor %}
+                <div class="table-data"></div>
 	</div>
 </div>
+</div>
 
+<br>
+    <p>
+    <div class="col-sm-5" style="border:2px solid #e9e9e9;margin-left:16%;margin-bottom:2%;">
+        <br><br>
+      <div class="table-row">
+        <div class="col-sm" style="margin-left:16%;">
+            Delivery type:
+        </div>
+        <div class="col-sm" style="margin-left:5%;">
+            <input type="radio" id="delivery" name="order_type" value="delivery" required>
+        <label for="delivery">Delivery</label>
+        </div>
+        <div class="col-sm" style="margin-left:5%;">
+            <input type="radio" id="pickup" name="order_type" value="pickup" required></d>
+        <label for="pickup">Pickup</label>
+        </div>
+        </div>
+<br>
+    <div class="table-row">
+        <div class="col-sm" style="margin-left:16%;margin-top:10px;">
+            Location:
+        </div>
+        <div class="col-sm-5" style="margin-left:6%;">
+    <select name="order_location" id="o_location" style="width:40%;" required>
+        <option hidden selected disabled>Choose location </option>
+        <option value="Vinzon's">Vinzon's</option>
+        <option value="Arki">Arki</option>
+        <option value="Math">Math</option>
+        <option value="Palma">Palma</option>
+        <option value="A2">A2</option>
+    </select>
+        </div>
+    </div>
+<br>
+    <div class="table-row">
+        <div class="col-sm" style="margin-left:16%;">
+            Payment Method:
+        </div>
+        <div class="col-sm" style="margin-left:6%;">
+    <input name="payment_method" value="Cash on Delivery" readonly>
+        </div>
+    </div>
+<br>
+    <div class="table-row">
+        <div class="col-sm" style="margin-left:16%;">
+            Payment Amount:
+        </div>
+        <div class="col-sm" style="margin-left:5%;">
+    ₱<input type="number" min="{{ totalprice }}" name="payment_amount" value="0" required>
+        </div>
+    </div>
+<br>
+        <br>
+    </div>
+</p>
+<br>
+    <div class="table-row">
+        <div class="col-md-12" style="float:right;text-align:right;margin-right:15%;">
+     <input class="custom-btn btn-11" type="submit" value="Finalize" name="action" for="">
+    </form>
+        <div style="float:left;text-align:left;margin-left:18%;">
+
+<form action="{{ url_for('cart', loginuser=loginuser, usercart=usercart, cartchecker=cartchecker, totalprice=totalprice) }}">
+    <input class="custom-btn btn-11" type="submit" value="Return to Cart" name="action"
+    style="position:left;width:100px;">
 </form>
+        </div>
+        </div>
+    </div>
 
 {% endblock %}

@@ -25,7 +25,6 @@ $color-form-highlight: #EEEEEE;
   background: transparent;
   cursor: pointer;
   transition: all 0.3s ease;
-  position: relative;
   display: inline-block;
 }
 
@@ -38,7 +37,6 @@ $color-form-highlight: #EEEEEE;
   color: #fff;
 }
 .btn-11:before {
-    position: absolute;
     content: '';
     display: inline-block;
     top: -180px;
@@ -62,14 +60,24 @@ $color-form-highlight: #EEEEEE;
     100% { -webkit-transform: scale(50) rotate(45deg); opacity: 0; }
 }
 
-.container {
+.container1{
 	max-width: 100%;
 	margin-right:auto;
 	margin-left:auto;
-	display:flex;
-	justify-content:center;
+	display:absolute;
 	align-items:center;
 	min-height:;
+	font-family: 'Lato';
+}
+
+.container2 {
+	max-width: 100%;
+	margin-right:auto;
+	margin-left:5%;
+	display:inline;
+	align-items:center;
+	min-height:;
+	font-family: 'Lato';
 }
 
 .table {
@@ -145,39 +153,63 @@ h16 {
   justify-content: center;
   align-items: center;
   height: 250px;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  background-color: #ff928e;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: 50%;
+  border: 0px solid #ff928e;
+  border-radius: 0px;
+  margin-right: 2rem;
+  color:white;
+  padding: 10px;
+  outline: none;
+  padding-right: 2rem;
+  active-color:white;
+  font-family: 'Lato';
+}
+select option {
+    color: #ff928e;
+    background-color: white;
+    font-weight: 900;
+
+}
+
 </style>
 
 
 {% if cartchecker == True %}
 
-<div class="col-sm-3">
-<form action="/menu">
-    <input class="custom-btn btn-11" type="submit" value="Add more" name="action">
-</form>
-    <form action="{{ url_for('checkout', user_id=user_id, users=username) }}" method="post">
-        <input class="custom-btn btn-11" type="submit" name="CHECK OUT" value="CHECK OUT">
-    </form>
-</div>
 
-<div class="container">
+
+<div class="container1">
 	<div class="table">
 		<div class="table-header">
 			<div class="header__item"><h16></h16></div>
-			<div class="header__item"><h16>Cart order</h16></div>
+			<div class="header__item"><h16>AMOUNT</h16></div>
+			<div class="header__item"><h16>CART ORDER</h16></div>
 			<div class="header__item"><h16></h16></div>
-			<div class="header__item"><h16>Meal type</h16></div>
-			<div class="header__item"><h16>Price</h16></div>
-			<div class="header__item"><h16>Amount</h16></div>
+			<div class="header__item"><h16>MEAL TYPE</h16></div>
+			<div class="header__item"><h16>PRICE</h16></div>
+            <div class="header__item"><h16>TOTAL</h16></div>
             <div class="header__item"><h16></h16></div>
             <div class="header__item"><h16></h16></div>
-            <div class="header__item"><h16>Total</h16></div>
+            <div class="header__item"><h16></h16></div>
 		</div>
 {% for userdata in usercart %}
     <form action="{{ url_for('edit') }}" method="post">
 
 		<div class="table-content">
-			<br><div class="table-row">
+                <br><div class="table-row" style="border-bottom: 2px solid #eee;">
 				<div class="table-data"><input class="hidden" id="cart_id" name="cart_id" value="{{ userdata.cart_id }}" readonly>
+                </div>
+                <div class="table-data"><input style="width:60px" type="number" id="alacarte_amount" name="alacarte_amount" value="{{ userdata.amount }}">
                 </div>
                 {% if userdata.alacarte_type == 'NULL' %}
 				<div class="table-data">{{ userdata.drinks_type|title }}</div>
@@ -188,8 +220,7 @@ h16 {
                 {% if userdata.sauces_type == 'NULL' %}
                     <input class="hidden" id="scs_type" name="alacarte_sauce" value="{{ userdata.sauces_type }}" readonly>
                 {% else %}
-
-                    <select name="alacarte_sauce" id="scs_type" style="width: 100px;">
+                    <select name="alacarte_sauce" id="scs_type" style="width: 100px;margin-bottom:5%;">
                         {% if userdata.sauces_type == 'plain' %}
                         <option value="plain" selected>Plain</option>
                         {% else %}
@@ -221,7 +252,7 @@ h16 {
                     <input class="hidden" id="fl_type" name="alacarte_flavor" value="{{ userdata.flavors_type }}" readonly>
                 {% else %}
 
-                    <select name="alacarte_flavor" id="fl_type" style="width: 100px;">
+                    <select name="alacarte_flavor" id="fl_type" style="width: 100px;margin-bottom:5%;">
                         {% if userdata.flavors_type == 'classic' %}
                         <option value="classic" selected>Classic</option>
                         {% else %}
@@ -263,9 +294,12 @@ h16 {
                         DRINK
                     {% endif %}
                 </div>
+
 				<div class="table-data"><input type="hidden" id="price" name="price" value="{{ userdata.price }}" readonly>
-                    {{ userdata.price }}</div>
-				<div class="table-data"><input style="width:60px" type="number" id="alacarte_amount" name="alacarte_amount" value="{{ userdata.amount }}">
+                    ₱{{ userdata.price }}</div>
+                <div class="table-data">
+                    <input type="hidden" id="total_amount" name="total_amount" value="{{ userdata.total_amount }}" readonly>
+                    ₱{{ userdata.total_amount }}
                 </div>
                 <div class="table-data"><input class="custom-btn btn-11" type="submit" value="EDIT" name="action">
                 </div>
@@ -273,25 +307,38 @@ h16 {
 
                 <div class="table-data">
                     <form action ="{{ url_for('delete', cart_id=userdata.cart_id) }}" method="post">
-                        <input class="custom-btn btn-11" type="submit" value="DELETE" name="action">
+                        <input class="custom-btn btn-11" type="submit" value="DELETE" name="action"
+                        style="font-family:'Lato';background-color:#ff928e;color:white;">
                     </form>
                 </div>
                 <div class="table-data">
-                    <input type="hidden" id="total_amount" name="total_amount" value="{{ userdata.total_amount }}" readonly>
-                    {{ userdata.total_amount }}
                 </div>
 			    </div>
 		</div>
 {% endfor %}
 	</div>
 </div>
-Total Price: {{ totalprice }}
-
+<div>
+</div>
+<div class="col-sm-4" style="display:inline">
+    <form action="/menu">
+        <input class="custom-btn btn-11" type="submit" value="Add more" name="action"
+        style="margin-left:37%;width:25%;">
+    </form>
+    </div>
+<div class="col-sm-4" style="display:inline;text-align:right;">
+</div>
+<div class="col-sm-4" style="display:inline;text-align:right;">
+    <form action="{{ url_for('checkout', user_id=user_id, users=username) }}" method="post">
+        <input class="custom-btn btn-11" type="submit" name="CHECK OUT" value="Check out"
+       style="margin-right:37%;width:25%;">
+    </form>
+</div>
 
 {% else %}
 
 <div class="w3-container w3-panel ">
-        <div class="w3-container w3-center" style="padding:220px;">
+        <div class="w3-container w3-center" style="padding:220px;font-family:'Lato';">
     <h3> Your cart seems to be empty. Order meals
         <a href="{{ url_for('basemenu') }}" style="padding:0px 0px;">here.</a></h3>
         </div>

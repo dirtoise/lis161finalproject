@@ -153,12 +153,16 @@ figure:hover+span {
   <br><h11><input class="custom-btn btn-11"  type="submit" value="ORDER A MEAL" name="action"></a></h11>
 </div>
 </form>
+{% if 'user' in session %}
 
-<form action="{{ url_for('login') }}">
-<div class="container text-center col">
-  <br><h11><input class="custom-btn btn-11"  type="submit" value="LOGIN" name="action"></a></h11>
-</div>
-</form>
+{% else %}
+    <form action="{{ url_for('login') }}">
+        <div class="container text-center col">
+          <br><h11><input class="custom-btn btn-11"  type="submit" value="LOGIN" name="action"></a></h11>
+        </div>
+    </form>
+{% endif %}
+
 <br> <br>
   <div class="row">
       <div class="col-sm-4">
@@ -196,7 +200,6 @@ figure:hover+span {
 
   </div>
 </div><br>
-</body>
-</html>
+
 
 {% endblock %}

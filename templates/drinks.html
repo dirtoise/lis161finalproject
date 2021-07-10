@@ -3,6 +3,15 @@
 {% block content %}
 
 <style>
+.w3-btn,.w3-button{border:none;display:inline-block;padding:8px 16px;vertical-align:middle;overflow:hidden;text-decoration:none;color:inherit;background-color:inherit;text-align:center;cursor:pointer;white-space:nowrap}
+
+.w3-dropdown-hover:hover > .w3-button:first-child,.w3-dropdown-click:hover > .w3-button:first-child{background-color:#ccc;color:#000}
+.w3-light-grey,.w3-hover-light-grey:hover,.w3-light-gray,.w3-hover-light-gray:hover{color:#000!important;background-color:#f1f1f1!important}
+.w3-section,.w3-code{margin-top:16px!important;margin-bottom:16px!important}
+.w3-content,.w3-auto{margin-left:auto;margin-right:auto}.w3-content{max-width:980px}.w3-auto{max-width:1140px}
+.w3-card-4,.w3-hover-shadow:hover{box-shadow:0 4px 10px 0 rgba(0,0,0,0.2),0 4px 10px 0 rgba(0,0,0,0.19)}
+.w3-container:after,.w3-container:before,.w3-panel:after,.w3-panel:before,.w3-row:after,.w3-row:before,.w3-row-padding:after,.w3-row-padding:before,
+.w3-left-align{text-align:left!important}.w3-right-align{text-align:right!important}.w3-justify{text-align:justify!important}.w3-center{text-align:center!important}
 
 .btn-11 {
   overflow: hidden;
@@ -38,6 +47,7 @@ display: inline-block;
   background-color: white;
   text-align: center;
 }
+
 </style>
 {% include 'menusidebar.html' %}
 <div class="grid-container">
@@ -69,24 +79,23 @@ display: inline-block;
   <div class="grid-item">
   </div>
   <div class="grid-item">
-      <img src="{{ url_for('static', filename=drinksid.url) }}" style="width:100%;border: 2px solid #ff928e;">
+      <img src="{{ url_for('static', filename=drinksid.url) }}" style="width:100%;">
   </div>
   <div class="grid-item"></div>
   <div class="grid-item">
   </div>
   <div class="grid-item">
-      <p style="margin-top:50px;">
-        <label type=""> Order amount: </label>
-            <div class="number">
-                <span class="minus">-</span>
-                    <input type="number" min="1" value="{{ drinksid.amount }}" name="amount" required>
-                <span class="plus">+</span>
-            </div>
-      </p>
+        <div class="number"style="text-align:left;color:#ff928e;">
+            Amount:
+                <input type="number" min="1" value="{{ drinksid.amount }}" name="amount"
+                       style="height:40px;border-color:#ff928e;" required>
+        </div>
   </div>
   <div class="grid-item">
-    <h1> <label for="drinks_type"> {{ drinksid.drinks_type|title }} </label> </h1>
+      <div class="w3-card-4" style="width:100%;background-color:#ff928e;">
+    <h2> <label for="drinks_type" style="font-family:Lato;color:white;"> {{ drinksid.drinks_type|title }} </label> </h2>
     <input class="hidden" id="drinks_type" name="drinks_type" value="{{ drinksid.drinks_type }}" readonly>
+  </div>
   </div>
   <div class="grid-item">
   </div>
@@ -99,10 +108,12 @@ display: inline-block;
   </div>
 
   <div class="grid-item">
-            <p style="margin-top:50px;">
-    <label for="drinks_price"> Price:  {{ drinksid.price }} </label>
+        <p style="margin-top:;font-family:Lato;font-size:50px;">
+                <div class="w3-card-4" style="width:112%;background-color:#ff928e;">
+    <h2><label for="drinks_price" style="color:white;"> ₱{{ drinksid.price }} </h2></label>
     <input class="hidden" id="drinks_price" name="price" value="{{ drinksid.price }}" readonly>
             </p>
+  </div>
   </div>
 </div>
 </form>

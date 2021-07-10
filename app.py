@@ -1,8 +1,14 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session,jsonify
 from data import *
 
 app = Flask(__name__)
 app.secret_key = '123'
+
+@app.route('/test')
+def test():
+    flavordict = select_dict_flavors()
+
+    return render_template('test.html',flavordict=flavordict)
 
 @app.route('/')
 def index():
@@ -38,8 +44,10 @@ def loginprocessing():
                         return redirect(url_for('user'))
                     else:
                         return redirect(url_for('user'))
+            else:
+                return redirect(url_for('login', ))
     else:
-        return redirect(url_for('login', ))
+        return redirect(url_for('register', ))
 
 
 @app.route('/register')
@@ -106,8 +114,8 @@ def profile():
             for finalusers in finalcart:
                 if finalusers['user'] == username:
                     finalusers['user_id']
-                    fuser_id = finalusers['user_id']
-    return render_template('profile.html',loginuser=loginuser,username=username,user_id=user_id,finalcart=finalcart,fuser_id=fuser_id,)
+                    finalusers = finalusers['user_id']
+    return render_template('profile.html',loginuser=loginuser,username=username,user_id=user_id,finalcart=finalcart,finalusers=finalusers,)
 
 @app.route('/menu')
 def basemenu():
@@ -263,6 +271,7 @@ def checkout(user_id,users):
             for users in loginuser:
                 users['username'] == session['user']
                 users = users['username']
+
     return render_template('checkout.html', users=users,user_id=user_id,usercart=usercart,totalprice=totalprice)
 
 

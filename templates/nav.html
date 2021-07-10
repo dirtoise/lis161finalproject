@@ -37,11 +37,10 @@ a:visited, a:link {
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="{{ url_for('index') }}">
-        <img src="{{ url_for('static', filename='img/logo2.png') }}" width="35" height="35" method="POST"></a>
-                <a class="navbar-brand navcustom" href="{{ url_for('index') }}"> UP E-Kiosk</a>
+        <img src="{{ url_for('static', filename='img/logo3.png') }}" width="30%" method="POST"></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav" style="margin-left:25%;">
         <li class=""><a href="{{ url_for('index') }}" class="navcustom">Home</a></li>
         <li><a href="{{ url_for('basemenu') }}" class="link navcustom">Menu</a></li>
         <li><a href="{{ url_for('baseorder') }}" class="navcustom">Order</a></li>
