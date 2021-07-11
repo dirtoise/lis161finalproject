@@ -119,7 +119,7 @@ def read_cart_by_id(cart_id):
     conn.close()
     return results
 
-def insert_alacarte_into_cart(cart_data):
+def insert_cart_into_cart(cart_data):
     conn, cur = connect_db(db_path)
     query = 'INSERT INTO cart (user_id, user, meals_type, alacarte_type, ' \
             'drinks_type, amount, price, flavors_type, sauces_type, total_amount) ' \
@@ -158,6 +158,28 @@ def update_cart(cart_data):
             cart_data['cart_id'],
     )
     cur.execute(query,values)
+    conn.commit()
+    conn.close()
+
+def insert_cart_into_cartreceipt(cart_data):
+    conn, cur = connect_db(db_path)
+    query = 'INSERT INTO cartreceipt (cart_id, user_id, user, meals_type, alacarte_type, ' \
+            'drinks_type, amount, price, flavors_type, sauces_type, total_amount) ' \
+            'VALUES (?,?,?,?,?,?,?,?,?,?,?)'
+    values = (
+              cart_data['cart_id'],
+              cart_data['user_id'],
+              cart_data['user'],
+              cart_data['meals_type'],
+              cart_data['alacarte_type'],
+              cart_data['drinks_type'],
+              cart_data['amount'],
+              cart_data['price'],
+              cart_data['flavors_type'],
+              cart_data['sauces_type'],
+              cart_data['total_amount'],
+    )
+    cur.execute(query, values)
     conn.commit()
     conn.close()
 

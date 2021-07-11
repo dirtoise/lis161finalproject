@@ -1,18 +1,17 @@
-from flask import Flask, render_template, request, redirect, url_for, session,jsonify
+from flask import Flask, render_template, request, redirect, url_for, session,jsonify,abort
 from data import *
 
 app = Flask(__name__)
 app.secret_key = '123'
 
-@app.route('/test')
-def test():
-    flavordict = select_dict_flavors()
-
-    return render_template('test.html',flavordict=flavordict)
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 @app.route('/login',)
 def login():
@@ -97,9 +96,15 @@ def user():
 @app.route('/logout')
 def logout():
     loginuser = select_dict_user()
-    cart = select_dict_cart()
+    usercart = select_dict_cart()
+    for users in loginuser:
+        if users['username'] == session['user']:
+            users['username']
+            username = users['username']
+        for cart in usercart:
+            cart_id = cart['cart_id']
+            delete_cart_from_cart(cart_id)
     session.pop('user', None)
-
     return redirect(url_for('login'))
 
 @app.route('/profile')
@@ -117,9 +122,35 @@ def profile():
                     finalusers = finalusers['user_id']
     return render_template('profile.html',loginuser=loginuser,username=username,user_id=user_id,finalcart=finalcart,finalusers=finalusers,)
 
+@app.route('/deleteconfirm', methods=['POST'])
+def deleteconfirm():
+    #delete_user_from_user(username)
+    if request.form['action'] == 'DELETE':
+        return render_template('choice.html')
+
+@app.route('/deleteaccount', methods=['POST'])
+def deleteaccount():
+    loginuser = select_dict_user()
+    usercart = select_dict_cart()
+
+    if request.form['action'] == 'Yes':
+        for users in loginuser:
+            if users['username'] == session['user']:
+                users['username']
+                username = users['username']
+            for cart in usercart:
+                cart_id = cart['cart_id']
+                delete_cart_from_cart(cart_id)
+        session.pop('user', None)
+        return redirect(url_for('index'))
+    elif request.form['action'] == 'No':
+        return redirect(url_for('profile'))
+
 @app.route('/menu')
 def basemenu():
-    return render_template('basemenu.html')
+    meals = select_dict_meals()
+
+    return render_template('basemenu.html',meals=meals)
 
 @app.route('/menu/<meals_type>/')
 def menu(meals_type):
@@ -193,7 +224,7 @@ def mealprocessing():
         'total_amount': int(totalamount),
     }
 
-    insert_alacarte_into_cart(cart_data)
+    insert_cart_into_cart(cart_data)
 
     return redirect(url_for('cart'))
 
@@ -217,7 +248,6 @@ def cart():
                 username = users['username']
                 user_id = users['user_id']
 
-
     cartchecker = any(usercart)
 
     return render_template('cart.html', loginuser=loginuser, usercart=usercart, cartchecker=cartchecker, totalprice=totalprice,username=username,user_id=user_id)
@@ -225,7 +255,6 @@ def cart():
 @app.route('/cart/delete/<int:cart_id>', methods=['POST'])
 def delete(cart_id):
     usercart = select_dict_cart()
-
     if request.form['action'] == 'DELETE':
         delete_cart_from_cart(cart_id)
         return redirect(url_for('cart', cart_id=cart_id, usercart=usercart))
@@ -293,20 +322,39 @@ def finalizeprocessing():
             finalcart_id = data['finalcart_id']
             finalcart_id += 1
 
-    for userdata in usercart:
-        finalcart_data = {
-            'finalcart_id' : int(finalcart_id),
-            'order_type' : request.form['order_type'],
-            'order_location' : request.form['order_location'],
-            'cart_id' : userdata['cart_id'],
-            'user_id' : userdata['user_id'],
-            'user' : userdata['user'],
-            'total_price' : int(request.form['totalprice']),
-            'payment_amount' : int(request.form['payment_amount']),
-            'change' : int(change),
-            'payment_method' : request.form['payment_method']
+    for carts in usercart:
+        cart_data = {
+            'cart_id': request.form['cart_id'],
+            'user_id': carts['user_id'],
+            'user': carts['user'],
+            'meals_type': carts['meals_type'],
+            'alacarte_type': carts['alacarte_type'],
+            'drinks_type': carts['drinks_type'],
+            'amount': carts['amount'],
+            'price': carts['price'],
+            'flavors_type': carts['flavors_type'],
+            'sauces_type': carts['sauces_type'],
+            'total_amount': carts['total_amount'],
         }
-        insert_final_into_finalcart(finalcart_data)
+    insert_cart_into_cartreceipt(cart_data)
+
+    try:
+        for userdata in usercart:
+            finalcart_data = {
+                'finalcart_id' : int(finalcart_id),
+                'order_type' : request.form['order_type'],
+                'order_location' : request.form['order_location'],
+                'cart_id' : userdata['cart_id'],
+                'user_id' : userdata['user_id'],
+                'user' : userdata['user'],
+                'total_price' : int(request.form['totalprice']),
+                'payment_amount' : int(request.form['payment_amount']),
+                'change' : int(change),
+                'payment_method' : request.form['payment_method']
+            }
+            insert_final_into_finalcart(finalcart_data)
+    except:
+        abort(400)
 
     return redirect(url_for('finalize', user_id=request.form['user_id'], users=request.form['username'], finalcart_id=finalcart_id))
 

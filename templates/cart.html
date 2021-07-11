@@ -207,9 +207,11 @@ select option {
 
 		<div class="table-content">
                 <br><div class="table-row" style="border-bottom: 2px solid #eee;">
-				<div class="table-data"><input class="hidden" id="cart_id" name="cart_id" value="{{ userdata.cart_id }}" readonly>
+				<div class="table-data">
+                    <input class="hidden" id="cart_id" name="cart_id" value="{{ userdata.cart_id }}" readonly>
                 </div>
-                <div class="table-data"><input style="width:60px" type="number" id="alacarte_amount" name="alacarte_amount" value="{{ userdata.amount }}">
+                <div class="table-data">
+                    <input style="width:60px;" type="number" id="alacarte_amount" name="alacarte_amount" value="{{ userdata.amount }}">
                 </div>
                 {% if userdata.alacarte_type == 'NULL' %}
 				<div class="table-data">{{ userdata.drinks_type|title }}</div>
@@ -220,7 +222,7 @@ select option {
                 {% if userdata.sauces_type == 'NULL' %}
                     <input class="hidden" id="scs_type" name="alacarte_sauce" value="{{ userdata.sauces_type }}" readonly>
                 {% else %}
-                    <select name="alacarte_sauce" id="scs_type" style="width: 100px;margin-bottom:5%;">
+                    <select name="alacarte_sauce" id="scs_type" style="width: 100px;">
                         {% if userdata.sauces_type == 'plain' %}
                         <option value="plain" selected>Plain</option>
                         {% else %}
@@ -252,7 +254,7 @@ select option {
                     <input class="hidden" id="fl_type" name="alacarte_flavor" value="{{ userdata.flavors_type }}" readonly>
                 {% else %}
 
-                    <select name="alacarte_flavor" id="fl_type" style="width: 100px;margin-bottom:5%;">
+                    <select name="alacarte_flavor" id="fl_type" style="width: 100px;">
                         {% if userdata.flavors_type == 'classic' %}
                         <option value="classic" selected>Classic</option>
                         {% else %}
@@ -308,7 +310,7 @@ select option {
                 <div class="table-data">
                     <form action ="{{ url_for('delete', cart_id=userdata.cart_id) }}" method="post">
                         <input class="custom-btn btn-11" type="submit" value="DELETE" name="action"
-                        style="font-family:'Lato';background-color:#ff928e;color:white;">
+                        style="font-family:'Lato';background-color:#ff928e;color:white;margin-bottom:5%;">
                     </form>
                 </div>
                 <div class="table-data">

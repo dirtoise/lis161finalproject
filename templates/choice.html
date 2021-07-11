@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+.custom-btn {
+  width: 70px;
+  height: 30px;
+  padding: 0px 0px;
+  border: 2px solid #ff928e;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn-11 {
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.btn-11:hover {
+  background: #ff928e;
+  color: #fff;
+}
+.btn-11:before {
+    content: '';
+    display: inline-block;
+    top: -180px;
+    left: 0;
+    width: 30px;
+    height: 100%;
+    background-color: #fff;
+    animation: shiny-btn1 3s ease-in-out infinite;
+}
+.btn-11:active{
+  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.3),
+              -4px -4px 6px 0 rgba(116, 125, 136, .2),
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
+}
+</style>
+<div class="table-row">
+    <div class="col-sm-2">
+    </div>
+    <div class="col-sm-9">
+            <div class="w3-center" style="padding:220px;font-family:'Lato';">
+                <span style="text-align:center;">
+                    Are you sure you want to delete your account? All of your data will be lost.
+                </span>
+                <p>
+                <form action="{{ url_for('deleteaccount') }}" method="post">
+                    <input class="hidden" id="username" name="username" value="{{ username }}" readonly>
+                    <input class="custom-btn btn-11" name="action" type="submit" value="Yes"
+                    style="margin-left:100px;margin-top:4%;">
+                    <input class="custom-btn btn-11" name="action" type="submit" value="No"
+                   style="margin-left:100px;">
+                </form>
+                </p>
+            </div>
+    </div>
+</div>
+
+{% endblock %}
