@@ -161,6 +161,13 @@ def update_cart(cart_data):
     conn.commit()
     conn.close()
 
+def select_dict_cartreceipt():
+    conn, cur = connect_db(db_path)
+    query = 'SELECT * FROM cartreceipt'
+    results = cur.execute(query, ()).fetchall()
+    conn.close()
+    return results
+
 def insert_cart_into_cartreceipt(cart_data):
     conn, cur = connect_db(db_path)
     query = 'INSERT INTO cartreceipt (cart_id, user_id, user, meals_type, alacarte_type, ' \

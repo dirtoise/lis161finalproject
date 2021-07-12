@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session,js
 from data import *
 
 app = Flask(__name__)
-app.secret_key = '123'
+app.secret_key = '0pilvuihtuc25'
 
 
 @app.route('/')
@@ -77,7 +77,7 @@ def registerprocessing():
                 }
                 insert_user_into_user(login_data)
                 update_user_in_cart(user_data)
-            elif any(cart) == False:
+            elif any(usercart) == False:
                 insert_user_into_user(login_data)
             return redirect(url_for('user'))
         else:
@@ -107,25 +107,26 @@ def logout():
     session.pop('user', None)
     return redirect(url_for('login'))
 
-@app.route('/profile')
-def profile():
+@app.route('/profile/<username>/')
+def profile(username):
     loginuser = select_dict_user()
     finalcart = select_dict_finalcart()
+    cartreceipt = select_dict_cartreceipt()
+    cartchecker = any(finalcart)
     for users in loginuser:
         if users['username'] == session['user']:
             users['username']
             username = users['username']
             user_id = users['user_id']
-            for finalusers in finalcart:
-                if finalusers['user'] == username:
-                    finalusers['user_id']
-                    finalusers = finalusers['user_id']
-    return render_template('profile.html',loginuser=loginuser,username=username,user_id=user_id,finalcart=finalcart,finalusers=finalusers,)
+
+
+    return render_template('profile.html',loginuser=loginuser,username=username,user_id=user_id,
+                           finalcart=finalcart,cartreceipt=cartreceipt,cartchecker=cartchecker)
 
 @app.route('/deleteconfirm', methods=['POST'])
 def deleteconfirm():
     #delete_user_from_user(username)
-    if request.form['action'] == 'DELETE':
+    if request.form['action'] == 'Delete Account':
         return render_template('choice.html')
 
 @app.route('/deleteaccount', methods=['POST'])
@@ -144,12 +145,11 @@ def deleteaccount():
         session.pop('user', None)
         return redirect(url_for('index'))
     elif request.form['action'] == 'No':
-        return redirect(url_for('profile'))
+        return redirect(url_for('profile', username=session['user']))
 
 @app.route('/menu')
 def basemenu():
     meals = select_dict_meals()
-
     return render_template('basemenu.html',meals=meals)
 
 @app.route('/menu/<meals_type>/')
@@ -322,21 +322,21 @@ def finalizeprocessing():
             finalcart_id = data['finalcart_id']
             finalcart_id += 1
 
-    for carts in usercart:
+    for userdata in usercart:
         cart_data = {
-            'cart_id': request.form['cart_id'],
-            'user_id': carts['user_id'],
-            'user': carts['user'],
-            'meals_type': carts['meals_type'],
-            'alacarte_type': carts['alacarte_type'],
-            'drinks_type': carts['drinks_type'],
-            'amount': carts['amount'],
-            'price': carts['price'],
-            'flavors_type': carts['flavors_type'],
-            'sauces_type': carts['sauces_type'],
-            'total_amount': carts['total_amount'],
+            'cart_id': userdata['cart_id'],
+            'user_id': userdata['user_id'],
+            'user': userdata['user'],
+            'meals_type': userdata['meals_type'],
+            'alacarte_type': userdata['alacarte_type'],
+            'drinks_type': userdata['drinks_type'],
+            'amount': userdata['amount'],
+            'price': userdata['price'],
+            'flavors_type': userdata['flavors_type'],
+            'sauces_type': userdata['sauces_type'],
+            'total_amount': userdata['total_amount'],
         }
-    insert_cart_into_cartreceipt(cart_data)
+        insert_cart_into_cartreceipt(cart_data)
 
     try:
         for userdata in usercart:
@@ -353,7 +353,9 @@ def finalizeprocessing():
                 'payment_method' : request.form['payment_method']
             }
             insert_final_into_finalcart(finalcart_data)
+            delete_cart_from_cart(finalcart_data['cart_id'])
     except:
+        delete_cart_from_cart(request.form['cart_id'])
         abort(400)
 
     return redirect(url_for('finalize', user_id=request.form['user_id'], users=request.form['username'], finalcart_id=finalcart_id))
@@ -363,7 +365,7 @@ def finalize(user_id,users,finalcart_id):
     loginuser = select_dict_user()
     finalcartid = read_finalcart_by_id(finalcart_id)
     finalcart = select_dict_finalcart()
-    usercart = select_dict_cart()
+    cartreceipt = select_dict_cartreceipt()
 
     if 'user' not in session:
         for users in loginuser:
@@ -375,7 +377,8 @@ def finalize(user_id,users,finalcart_id):
                 users = users['username']
 
     return render_template('final.html', user_id=user_id, users=users, finalcart_id=finalcart_id,
-                           finalcartid=finalcartid, finalcart=finalcart, usercart=usercart)
+                           finalcartid=finalcartid, finalcart=finalcart, cartreceipt=cartreceipt,
+                           loginuser=loginuser)
 
 # Kiosk route to work on later
 """ 

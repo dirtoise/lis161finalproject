@@ -186,8 +186,6 @@ select option {
 
 {% if cartchecker == True %}
 
-
-
 <div class="container1">
 	<div class="table">
 		<div class="table-header">
@@ -253,7 +251,6 @@ select option {
                 {% if userdata.flavors_type == 'NULL' %}
                     <input class="hidden" id="fl_type" name="alacarte_flavor" value="{{ userdata.flavors_type }}" readonly>
                 {% else %}
-
                     <select name="alacarte_flavor" id="fl_type" style="width: 100px;">
                         {% if userdata.flavors_type == 'classic' %}
                         <option value="classic" selected>Classic</option>

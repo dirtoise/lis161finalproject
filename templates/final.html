@@ -98,9 +98,7 @@
     border-top: 2px solid #333;
     font-weight: 700;
 </style>
-
 <table class="body-wrap">
-
 <td class="container" width="600" >
     <div class="content">
         <table class="main" width="100%" cellpadding="0" cellspacing="0">
@@ -131,12 +129,14 @@
                                         <td>
                                             <table class="invoice-items" cellpadding="0" cellspacing="0">
                                                 <tbody>
-                                                {% for items in usercart %}
-                                                    {% if items['user_id'] in finalcartid %}
+                                                    {% for data in finalcart %}
+                                                    {% if data.finalcart_id == finalcart_id %}
+                                                    {% for items in cartreceipt %}
+                                                    {% if items.cart_id == data.cart_id %}
                                                         {% if items['alacarte_type'] == 'NULL' %}
                                                         <tr>
                                                             <td class="alignleft" width="80%">
-                                                                <p><span style="margin-left:5%;"> {{ items['amount'] }}</span>
+                                                                <p><span style="margin-left:5%;"> {{ items.amount }}</span>
                                                                 <span style="margin-left:10%;"> {{ items['drinks_type'] }} </span>
                                                                 <span style="margin-left:10%;" >₱{{ items['price'] }}</span></p>
                                                             </td>
@@ -157,7 +157,9 @@
                                                             </tr>
                                                         {% endif %}
                                                     {% endif %}
-                                                {% endfor %}
+                                                    {% endfor %}
+                                                    {% endif %}
+                                                    {% endfor %}
                                                 <tr class="total">
                                                     <td class="alignright" width="80%">Total</td>
                                                     <td class="alignright">₱ {{ finalcartid.total_price }}</td>

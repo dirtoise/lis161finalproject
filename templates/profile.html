@@ -98,11 +98,7 @@
     border-top: 2px solid #333;
     font-weight: 700;
 </style>
-
-
-
 <table class="body-wrap">
-
 <td class="container" width="600" >
     <div class="content">
         <table class="main" width="100%" cellpadding="0" cellspacing="0">
@@ -116,26 +112,104 @@
                             <span style="font-size:10px;text-align:left;">This is your data profile.</span>
                             </td>
                         </tr>
+
                          <tr>
                             <td>
                                 <table class="invoice-items" cellpadding="0" cellspacing="0">
                                     <tbody>
-                                            <tr>
-                                                <td class="aligncenter" width="75%">
-                                                </td>
-                                                <td>
-                                                    <form action="{{ url_for('deleteconfirm') }}" method="post">
-                                                        <input class="hidden" id="username" name="username" value="{{ username }}" readonly>
-                                                        <input class="" name="action" type="submit" value="DELETE">
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                        <tr>
+                                            <td class="alignleft" width="100%">
+                                                <span style="margin-left:0%;">Order History</span>
+                                            </td>
+                                            <td class="alignright" width="20%">
+                                            </td>
+                                        {% for data in finalcart %}
+                                            {% if username in data['user'] %}
+                                                {% if cartchecker == True %}
+                                                <tr>
+                                                    <td class="alignleft" width="80%"style="padding:3%;">
+                                                        <span style="margin-left:7%;">Cart ID  |  Location</span>
+                                                        <span style="margin-left:40%;">{{ data.cart_id }} </span>
+                                                    </td>
+                                                    <td class="alignright" width="20%" style="padding-right:30px;">
+                                                        <span style="margin-right:100%;">{{ data.order_location }}</span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="margin-bottom:10px">
+                                                    <td class="alignleft" width="80%">
+                                                        <span style="margin-left:15%;">Meal</span>
+                                                    </td>
+                                                    <td class="alignright" width="80%">
+                                                        <span style="margin-right:100%;"></span>
+                                                    </td>
+                                                </tr>
+                                                    {% for items in cartreceipt %}
+                                                        {% if items.cart_id == data.cart_id %}
+                                                <tr >
+                                                    <td class="alignleft" width="80%" style="padding:1%;">
+                                                        <span style="margin-left:30%;">{{ items.amount }}</span>
+                                                            {% if items.drinks_type == 'NULL' %}
+                                                        <span style="margin-left:10%;">{{ items.alacarte_type|title }}</span>
+                                                                {% if items.sauces_type == 'NULL' %}
+                                                            <span style="margin-left:5%;">({{ items.flavors_type|title }})</span>
+                                                                {% elif items.flavors_type == 'NULL' %}
+                                                            <span style="margin-left:5%;">({{ items.sauces_type|title }})</span>
+                                                                {% endif %}
+                                                            {% elif items.alacarte_type == 'NULL' %}
+                                                        <span style="margin-left:10%;">{{ items.drinks_type }}</span>
+                                                        <span></span>
+                                                            {% endif %}
+                                                    </td>
+                                                    <td class="alignright" width="100%">
+                                                        <span style="margin-right:100%;">₱{{ items.total_amount }}</span>
+                                                    </td>
+                                                </tr>
+                                                {% endif %}
+                                            {% endfor %}
+                                        <tr>
+                                            <td class="alignleft" width="80%">
+                                            </td>
+                                            <td class="alignright" width="100%">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="alignleft" width="80%">
+                                                <span style="margin-left:20%;">Total Price</span>
+                                            </td>
+                                            <td class="alignright" width="100%">
+                                                <span style="margin-right:100%;">₱{{ data.total_price }}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="alignleft" width="80%">
+                                                <span style="margin-left:20%;">Amount Paid</span>
+                                            </td>
+                                            <td class="alignright" width="100%">
+                                                <span style="margin-right:100%;">₱{{ data.payment_amount }}</span>
+                                            </td>
+                                        </tr>
+                                            {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        <tr>
+                                            <td class="alignleft" width="100%">
 
+                                            </td>
+                                            <td class="alignright" width="100%">
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </td>
                         </tr>
-
+<!--
+                        <tr>
+                            <td class="aligncenter"><h6>
+                                Oof. There doesn't seem to be anything in here yet.
+                                <br>How about<a href="{{url_for('basemenu')}}"> making an order? </a></h6>
+                            </td>
+                        </tr>
+--->
                         </tbody>
                     </table>
 
@@ -143,7 +217,14 @@
             </tr></tbody>
         </table>
     </div>
+        <form action="{{ url_for('deleteconfirm') }}" method="post">
+            <span style="margin-left:65%">
+            <input class="hidden" id="username" name="username" value="{{ username }}" readonly>
+            <input class="" name="action" type="submit" value="Delete Account">
+            </span>
+        </form>
 </td>
+
 </table>
 
 
