@@ -203,21 +203,26 @@ select option {
                         <input class="hidden" style="width:60px" id="alacarte_amount" name="alacarte_amount" value="{{ userdata.amount }}" readonly>
                         {{ userdata.amount }}
                     </div>
+                        {% if userdata.drinks_type == 'NULL' %}
                     <div class="table-data">
                         <input class="hidden" id="alacarte_type" name="alacarte_type" value="{{ userdata.alacarte_type }}" readonly>
                         {{ userdata.alacarte_type|title }}
                     </div>
+                        {% elif userdata.alacarte_type == 'NULL' %}
+                    <div class="table-data">
+                        <input class="hidden" id="drinks_type" name="drinks_type" value="{{ userdata.drinks_type }}" readonly>
+                        {{ userdata.drinks_type|title }}
+                    </div>
+                        {% endif %}
                     <div class="table-data">
                     {% if userdata.sauces_type == 'NULL' %}
                         <input class="hidden" id="scs_type" name="alacarte_sauce" value="{{ userdata.sauces_type }}" readonly>
                         <input class="hidden" name="alacarte_flavor" id="fl_type" style="width: 100px;" value="{{ userdata.flavors_type }}" readonly>
                         {{ userdata.flavors_type|title }}
-                    {% else %}
-                        {% if userdata.flavors_type == 'NULL' %}
+                    {% elif userdata.flavors_type == 'NULL' %}
                         <input class="hidden" id="fl_type" name="alacarte_flavor" value="{{ userdata.flavors_type }}" readonly>
                         <input class="hidden" name="alacarte_sauce" id="scs_type" style="width: 100px;" value="{{ userdata.sauces_type }}" readonly>
                         {{ userdata.sauces_type|title }}
-                        {% endif %}
                     {% endif %}
                     </div>
                     <div class="table-data">
@@ -319,7 +324,7 @@ select option {
 <br>
     <div class="table-row">
         <div class="col-md-12" style="float:right;text-align:right;margin-right:15%;">
-     <input class="custom-btn btn-11" type="submit" value="Finalize" name="action" for="">
+     <input class="custom-btn btn-11" type="submit" value="Finalize" name="action" for=""   >
     </form>
         <div style="float:left;text-align:left;margin-left:18%;">
 

@@ -59,15 +59,15 @@ display: inline-block;
   <div class="grid-item"></div>
   <div class="grid-item"></div>
   <div class="grid-item">
-    <form action="{{ url_for('mealprocessing') }}" method="post">
+<form action="{{ url_for('mealprocessing') }}" method="post">
     <input class="custom-btn btn-11" type="submit" value="Confirm order" name="action">
   </div>
   <div class="grid-item">
     <input class="hidden" id="username" name="username" value="{{ username }}" readonly>
     <input class="hidden" id="user_id" name="user_id" value="{{ user_id }}" readonly>
     <input class="hidden" id="alacarte_type" name="alacarte_type" value="NULL" readonly>
-    <input class="hidden" id="alacarte_sauce" name="alacarte_sauce" value=NULL readonly>
-    <input class="hidden" id="alacarte_flavor" name="alacarte_flavor" value=NULL readonly>
+    <input class="hidden" id="alacarte_sauce" name="alacarte_sauce" value="NULL" readonly>
+    <input class="hidden" id="alacarte_flavor" name="alacarte_flavor" value="NULL" readonly>
       {% for meal in meals %}
         {% if meal['meals_type'] == 'drinks' %}
             <input class="hidden" name="meals_type" value="{{ meal['meals_type'] }}" readonly>

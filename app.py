@@ -51,37 +51,42 @@ def loginprocessing():
 
 @app.route('/register')
 def register():
-    return render_template('register.html')
+    return render_template('register.html',)
 
 @app.route('/registerprocessing', methods=['POST'])
 def registerprocessing():
     loginuser = select_dict_user()
     usercart = select_dict_cart()
 
+    for user in loginuser:
+        user['username']
+
     login_data = {
         'user' : request.form['name'],
         'password' : request.form['password'],
     }
+
     if request.form['password'] == request.form['confirmpassword']:
-        if 'user' not in loginuser:
+        if login_data['user'] in user['username']:
+            return redirect(url_for('login',))
+        elif login_data['user'] not in user['username']:
             user = request.form['name']
             session['user'] = user
             if any(usercart) == True:
                 for ids in usercart:
                     ids['cart_id']
                     cart_id = ids['cart_id']
-                user_data = {
-                    'user' : request.form['name'],
-                    'user_id' : ids['user_id'],
-                    'cart_id' : cart_id,
-                }
+                    user_data = {
+                        'user' : request.form['name'],
+                        'user_id' : ids['user_id'],
+                        'cart_id' : cart_id,
+                    }
+                    update_user_in_cart(user_data)
+
                 insert_user_into_user(login_data)
-                update_user_in_cart(user_data)
             elif any(usercart) == False:
                 insert_user_into_user(login_data)
             return redirect(url_for('user'))
-        else:
-            return redirect(url_for('login'))
     else:
         return redirect(url_for('register'))
 
@@ -143,6 +148,7 @@ def deleteaccount():
                 cart_id = cart['cart_id']
                 delete_cart_from_cart(cart_id)
         session.pop('user', None)
+        delete_user_from_user(username)
         return redirect(url_for('index'))
     elif request.form['action'] == 'No':
         return redirect(url_for('profile', username=session['user']))
@@ -157,7 +163,8 @@ def menu(meals_type):
     meals = read_meals_by_type(meals_type,)
     alacartesdict = select_dict_alacarte_type()
     drinksdict = select_dict_drinks_type()
-    return render_template('menu.html',meals_type=meals_type,meals=meals,alacartesdict=alacartesdict,drinksdict=drinksdict)
+    return render_template('menu.html',meals_type=meals_type,meals=meals,
+                           alacartesdict=alacartesdict,drinksdict=drinksdict)
 
 @app.route('/menu/drinks/<int:drinks_id>/<drinks_type>/')
 def drinks(drinks_id,drinks_type):
@@ -202,8 +209,8 @@ def alacartes(alacarte_id, alacarte_type):
                            alacarte_type=alacarte_type,flavordict=flavordict,saucedict=saucedict,
                            meals=meals,loginuser=loginuser,username=username,user_id=user_id)
 
-@app.route('/order')
-def baseorder():
+@app.route('/kiosk')
+def kiosk():
     return render_template('order.html')
 
 @app.route('/mealprocessing/', methods=['POST'])
@@ -233,9 +240,6 @@ def cart():
     usercart = select_dict_cart()
     loginuser = select_dict_user()
 
-    totalprice = 0
-    for userdata in usercart:
-        totalprice += int(userdata['total_amount'])
 
     for users in loginuser:
         if 'user' not in session:
@@ -250,7 +254,9 @@ def cart():
 
     cartchecker = any(usercart)
 
-    return render_template('cart.html', loginuser=loginuser, usercart=usercart, cartchecker=cartchecker, totalprice=totalprice,username=username,user_id=user_id)
+    return render_template('cart.html', loginuser=loginuser, usercart=usercart,
+                           cartchecker=cartchecker,username=username,
+                           user_id=user_id)
 
 @app.route('/cart/delete/<int:cart_id>', methods=['POST'])
 def delete(cart_id):
@@ -312,7 +318,8 @@ def finalizeprocessing():
     if int(request.form['payment_amount']) >= int(request.form['totalprice']):
         change = int(request.form['payment_amount']) - int(request.form['totalprice'])
     else:
-        return redirect(url_for('checkout', users=users,user_id=user_id,usercart=usercart,totalprice=totalprice))
+        return redirect(url_for('checkout', users=users,user_id=user_id,usercart=usercart,
+                                totalprice=totalprice))
 
     if any(finalcart) == False:
         finalcart_id = 0
@@ -355,10 +362,9 @@ def finalizeprocessing():
             insert_final_into_finalcart(finalcart_data)
             delete_cart_from_cart(finalcart_data['cart_id'])
     except:
-        delete_cart_from_cart(request.form['cart_id'])
         abort(400)
-
-    return redirect(url_for('finalize', user_id=request.form['user_id'], users=request.form['username'], finalcart_id=finalcart_id))
+    return redirect(url_for('finalize', user_id=request.form['user_id'],
+                            users=request.form['username'], finalcart_id=finalcart_id))
 
 @app.route('/cart/<int:user_id>/<users>/<int:finalcart_id>/finalize')
 def finalize(user_id,users,finalcart_id):

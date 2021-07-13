@@ -109,11 +109,9 @@ select option {
       <span style="text-align:left;">Flavors:</span>
         <select name="alacarte_flavor" id="fl_type" style="position:center;"  required>
         {% for flavors in flavordict %}
-            <img src="{{ url_for('static', filename=flavors.url) }}" style="width:10%">
             <option value="{{ flavors.flavors_type }}" name="alacarte_flavor">
                 {{ flavors.flavors_type|title }}
             </option>
-
         {% endfor %}
         </select>
     <input class="hidden" id="alacarte_sauce" name="alacarte_sauce" value=NULL readonly>
@@ -126,11 +124,6 @@ select option {
             </option>
         {% endfor %}
         </select>
-        {% for sauces in saucedict %}
-            {% if alacarte_sauce %}
-                <img src="{{ url_for('static', filename=sauces.url) }}" style="width:10%">
-            {% endif %}
-        {% endfor %}
     <input class="hidden" id="alacarte_flavor" name="alacarte_flavor" value=NULL readonly>
     {% endif %}
   </div>
@@ -150,7 +143,7 @@ select option {
   <div class="grid-item">
   </div>
   <div class="grid-item">
-          {% for meal in meals %}
+    {% for meal in meals %}
         {% if meal['meals_type'] == 'alacarte' %}
             <input class="hidden" name="meals_type" value="{{ meal['meals_type'] }}" readonly>
         {% endif %}
@@ -158,8 +151,8 @@ select option {
   </div>
 
   <div class="grid-item">
-            <p style="margin-top:;font-family:Lato;font-size:50px;">
-                <div class="w3-card-4" style="width:112%;background-color:#ff928e;">
+        <p style="margin-top:;font-family:Lato;font-size:50px;">
+            <div class="w3-card-4" style="width:112%;background-color:#ff928e;">
       <h2><label for="alacarte_price" style="color:white;">₱{{ alacarteid.price }}</h2> </label>
     <input class="hidden" id="alacarte_price" name="price" value="{{ alacarteid.price }}" readonly>
       </p></div>
